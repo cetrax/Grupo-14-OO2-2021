@@ -1,0 +1,15 @@
+<form action="#" th:action="@{/locales/update}"
+	th:object="${local}" method="post">
+	<input type="hidden" th:field="*{idLocal}" />
+	</p>
+	<p> Direccion: <input type="text" th:field="*{direccion}" /> </p>
+	<p> Latitud: <input type="number" th:field="*{latitud}" /> </p>
+	<p> Longitud: <input type="number" th:field="*{longitud}" /> </p>
+	<p> Telefono: <input type="text" th:field="*{telefono}" /> </p>
+</form>
+
+<form action="#"
+	th:action="@{/locales/delete/{id}(id=${local.idLocal})}"
+	method="post">
+	<input type="submit" value="Delete Local" />
+</form>

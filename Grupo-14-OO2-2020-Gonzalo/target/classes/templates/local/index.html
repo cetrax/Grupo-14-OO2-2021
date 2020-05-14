@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Local</title>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Direccion</th>
+				<th>Latitud</th>
+				<th>Longitud</th>
+				<th>Telefono</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr th:each="local : ${locales}">
+				<td><span th:text="${local.Direccion}" /></td>
+				<td><span th:text="${local.Latitud}" /></td>
+				<td><span th:text="${local.Longitud}" /></td>
+				<td><span th:text="${local.Telefono}" /></td>
+				<td><a th:href="@{/locales/{id}(id=${local.idLocal})}">Ver</a></td>
+	
+			</tr>
+		</tbody>
+	</table>
+
+	<a th:href="@{/locales/new}">agregar</a>
+
+</body>
+
+</html>
+

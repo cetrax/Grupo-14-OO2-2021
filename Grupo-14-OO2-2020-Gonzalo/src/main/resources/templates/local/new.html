@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<title>Carga de datos</title>
+	</head>
+  <body>
+	<form action="#" th:action="@{/locales/create}" th:object="${local}" method="post">
+		<p> Direccion: <input type="text" th:field="*{direccion}" /> </p>
+		<p> Latitud: <input type="number" th:field="*{latitud}" /> </p>
+		<p>	Longitud: <input type="number" th:field="*{longitud}" /> </p>
+		<p>	Telefono: <input type="text" th:field="*{telefono}" /> </p>
+		
+		<input type="submit" value="Agregar"/>
+	</form>
+  </body>
+</html>
+
+<!--  
+<form action="../../form-result.php" method="post" target="_blank">
+
+  <p>Fecha esperada: <input type="date" name="fechaesperada"> <input type="submit" value="Enviar datos"></p>
+
+</form>
+-->
