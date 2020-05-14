@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<title>Carga de datos</title>
+	</head>
+  <body>
+		<form action="#" th:action="@{/empleados/create}" th:object="${empleado}" method="post">
+			<p> Nombre: <input type="text" th:field="*{nombre}" /> </p>
+			<p> Apellido: <input type="text" th:field="*{apellido}" /> </p>
+			<p>	Fecha de Nacimiento: <input type="date" th:field="*{fechaDeNacimiento}" /> </p>
+			<p>	DNI: <input type="number" th:field="*{dni}" /> </p>
+			<p>	Franja Horaria: <input type="text" th:field="*{franjaHoraria}" /> </p>
+			<p>	Tipo Empleado: <input type="checkbox" th:field="*{tipoEmpleado}" /> </p>
+			
+			<input type="submit" value="Agregar" />
+		</form>
+  </body>
+</html>
+
+<!--  
+<form action="../../form-result.php" method="post" target="_blank">
+
+  <p>Fecha esperada: <input type="date" name="fechaesperada"> <input type="submit" value="Enviar datos"></p>
+
+</form>
+-->
