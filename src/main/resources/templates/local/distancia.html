@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Resultado</title>
+</head>
+
+<body>
+<p> Distancia (km)</p>
+<td> <span th:text = "${distancia}"/></td>
+	<form action="#" th:action="@{/locales/" th:object="${local}" method="post">
+		<p> Resultado: <output type="number" th:field="*{resultado}"/> </p>
+	</form>	
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+<!-- <p>Local 2: </p> -->
+<!-- <p>Latitud: <span th:text = "${lat2}"/>, longitud: <span th:text = "${long2}"/> </p> -->
+<!-- <p> Distancia (km)</p> -->
+<!-- <td> <span th:text = "${distancia}"/></td> -->
+<!-- <form action="#" th:action=@{/locales/at...> -->
+
+	
+<!-- </form>	 -->
