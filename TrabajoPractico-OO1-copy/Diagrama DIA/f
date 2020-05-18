@@ -1,0 +1,29 @@
+[33mcommit 86bd9488603d40b5c6b71bd7fd1522c80ce5f855[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Franco Aguirre <FrancoAguirre644@gmail.com>
+Date:   Sun Oct 13 00:18:16 2019 -0300
+
+    TP OO1 (Calcular distancia agregado)
+
+[33mcommit 3fc776e90f197cfe8bc461aaeece831afce5dda0[m
+Author: Ignacio Cazcarra <nacho.eze.cazcarra@gmail.com>
+Date:   Sat Oct 12 18:14:02 2019 -0300
+
+    Se agregaron los traer. 12 Casos de uso restantes sin hacer. 12/10
+
+[33mcommit dbba8ae0166d1d74048954b13a69d0da4a8a7b60[m
+Author: Ignacio Cazcarra <nacho.eze.cazcarra@gmail.com>
+Date:   Sat Oct 12 17:01:57 2019 -0300
+
+    Se termino de implementar ABM y se corrigieron pequeños errores en otras clases
+
+[33mcommit 12beef3516e19b0948dfe9425a2fd42813bc12e4[m
+Author: Ignacio Cazcarra <nacho.eze.cazcarra@gmail.com>
+Date:   Fri Oct 11 16:22:41 2019 -0300
+
+    Se agregaron los ABM
+
+[33mcommit 2c3fac84568b88bd82b50660fada1bfcad281483[m
+Author: Ignacio <nacho.eze.cazcarra@gmail.com>
+Date:   Thu Sep 26 16:42:27 2019 -0300
+
+    Primera version del tp de objetos. 26/9
