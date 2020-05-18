@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EMPLEADO</title>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Fecha de Nacimiento</th>
+				<th>DNI</th>
+				<th>Franja Horaria</th>
+				<th>Tipo de Empleado</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr th:each="empleado : ${empleados}">
+				<td><span th:text="${empleado.nombre}" /></td>
+				<td><span th:text="${empleado.apellido}" /></td>
+				<td><span th:text="${empleado.fechaDeNacimiento}" /></td>
+				<td><span th:text="${empleado.dni}" /></td>
+				<td><span th:text="${empleado.franjaHoraria}" /></td>
+				<td><span th:text="${empleado.tipoEmpleado}" /></td>
+				<td><a th:href="@{/empleados/{id}(id=${empleado.idPersona})}">Ver</a></td>
+	
+			</tr>
+		</tbody>
+	</table>
+
+	<a th:href="@{/empleados/new}">agregar</a>
+
+</body>
+
+</html>
+
