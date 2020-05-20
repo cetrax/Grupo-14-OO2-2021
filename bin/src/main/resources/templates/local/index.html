@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Local</title>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr>
+   				<th>id</th>
+				<th>Direccion</th>
+				<th>Latitud</th>
+				<th>Longitud</th>
+				<th>Telefono</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr th:each="local : ${locales}">
+       			<td><span th:text="${local.idLocal}" /></td>
+				<td><span th:text="${local.direccion}" /></td>
+				<td><span th:text="${local.latitud}" /></td>
+				<td><span th:text="${local.longitud}" /></td>
+				<td><span th:text="${local.telefono}" /></td>
+				<td><a th:href="@{/locales/{id}(id=${local.idLocal})}">Ver</a></td>
+
+			</tr>
+		</tbody>
+	</table>
+	<p></p>
+	<a th:href="@{/locales/new}">agregar</a>
+	<br/>
+	<a th:href="@{/locales/calculodist}">Calcular distancia por id</a>
+	<br/>
+	<a th:href="@{/locales/comenzarCalculoDistancia}">Calcular distancia por lista</a>
+
+</body>
+
+</html>
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cliente</title>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Dni</th>
+				<th>FechaDeNacimiento</th>
+				<th>Email</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr th:each="cliente : ${clientes}">
+				<td><span th:text="${cliente.nombre}" /></td>
+				<td><span th:text="${cliente.apellido}" /></td>
+				<td><span th:text="${cliente.dni}" /></td>
+				<td><span th:text="${cliente.fechaDeNacimiento}" /></td>
+				<td><span th:text="${cliente.email}" /></td>
+				<td><a th:href="@{/clientes/{id}(id=${cliente.idPersona})}">Ver</a></td>
+	
+			</tr>
+		</tbody>
+	</table>
+
+	<a th:href="@{/clientes/new}">agregar</a>
+
+</body>
+
+</html>
+

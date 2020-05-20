@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Producto</title>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr>
+				<th>idStock</th>
+				<th>Lotes</th>
+				<th>cantidad</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr th:each="stock : ${stocks}">
+				<td><span th:text="${stock.idStock}" /></td>
+				<td><span th:text="${stock.lotes}" /></td>
+				<td><span th:text="${stock.cantidad}" /></td>
+				<td><a th:href="@{/stocks/{id}(id=${stock.idStock})}">Ver</a></td>
+	
+			</tr>
+		</tbody>
+	</table>
+
+	<a th:href="@{/stocks/new}">agregar</a>
+
+</body>
+
+</html>
+

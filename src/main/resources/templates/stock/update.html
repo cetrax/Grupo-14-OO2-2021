@@ -1,0 +1,15 @@
+<form action="#" th:action="@{/stocks/update}"
+	th:object="${stock}" method="post">
+	<input type="hidden" th:field="*{idStock}" />
+	</p>
+	<p> Lotes: <input type="text" th:field="*{lotes}" />
+	<p> Cantidad: <input type="text" th:field="*{cantidad}" />
+	</p>
+	<input type="submit" value="Edit" />
+</form>
+
+<form action="#"
+	th:action="@{/stocks/delete/{id}(id=${stock.idStock})}"
+	method="post">
+	<input type="submit" value="Delete Stock" />
+</form>

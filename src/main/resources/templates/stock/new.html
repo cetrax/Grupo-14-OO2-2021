@@ -1,0 +1,5 @@
+<form action="#" th:action="@{/stocks/create}" th:object="${stock}" method="post">
+	<p> Lote: <input type="text" th:field="*{lotes}" /> </p>
+	<p> Cantidad: <input type="text" th:field="*{cantidad}" /> </p>
+	<input type="submit" />
+</form>
