@@ -1,0 +1,16 @@
+<form action="#" th:action="@{/clientes/update}"
+	th:object="${cliente}" method="post">
+	<input type="hidden" th:field="*{idPersona}" />
+	</p>
+	<p> Nombre: <input type="text" th:field="*{nombre}" /> </p>
+	<p> Apellido: <input type="text" th:field="*{apellido}" /> </p>
+	<p> Dni: <input type="text" th:field="*{dni}" /> </p>
+	<p> FechaDeNacimiento: <input type="date" th:field="*{fechaDeNacimiento}" /> </p>
+	<p> Email: <input type="text" th:field="*{email}" /> </p>
+</form>
+
+<form action="#"
+	th:action="@{/clientes/delete/{id}(id=${cliente.idPersona})}"
+	method="post">
+	<input type="submit" value="Delete Client" />
+</form>

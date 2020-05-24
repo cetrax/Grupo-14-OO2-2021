@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lote</title>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>Producto</th>
+				<th>CantidadInicial</th>
+				<th>CantidadActual</th>
+				<th>FechaIngreso</th>
+				<th>Estado</th>
+				
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr th:each="lote : ${lotes}">
+				<td><span th:text="${lote.idLote}" /></td>
+				<td><span th:text="${producto.nombre}" /></td>
+				<td><span th:text="${lote.cantidadInicial}" /></td>
+				<td><span th:text="${lote.cantidadActual}" /></td>
+				<td><span th:text="${lote.fechaIngreso}" /></td>
+				<td><a th:href="@{/lotes/{id}(id=${lote.idLote})}">Ver</a></td>
+	
+			</tr>
+		</tbody>
+	</table>
+
+	<a th:href="@{/lotes/new}">agregar</a>
+
+</body>
+
+</html>
+
