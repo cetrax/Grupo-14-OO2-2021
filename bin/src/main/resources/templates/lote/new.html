@@ -1,0 +1,7 @@
+<form action="#" th:action="@{/lotes/create}" th:object="${lote}" method="post">
+	<p> CantidadInicial: <input type="number" th:field="*{cantidadInicial}" /> </p>
+	<p> CantidadActual: <input type="number" th:field="*{cantidadActual}" /> </p>
+	<p>	FechaIngreso: <input type="date" th:field="*{fechaIngreso}" /> </p>
+	<p>	Estado: <input type="checkbox" th:field="*{estado}" /> </p>
+	<input type="submit" />
+</form>

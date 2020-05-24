@@ -1,0 +1,34 @@
+<form action="obtenerDistancia" method="Post">
+	<p> Elija el primer local:</p>
+	<select placeholder="local1" name="local1.idLocal">
+		<option th:each="l : ${locales}" th:value="${l.idLocal}" th:text=${l.direccion}></option>
+	</select>
+
+	<p> Elija el segundo local:</p>
+	<select placeholder="local2" name="local2.idLocal">
+		<option th:each="l : ${locales}" th:value="${l.idLocal}" th:text=${l.direccion}></option>
+	</select> 
+	<br/>
+	<br/>
+	<input type="submit" value="Calcular"/>
+</form>
+
+<!--
+Form:
+Con action="obtenerDistancia" method="Post" estoy diciendo que lo que envie el form 
+ sera recibido dónde haya un @RequestMapping(value="/obtenerDistancia",method=RequestMethod.POST) 
+Select: 
+En name (normalmente va un nombre le quiera poner para citarlo,por ejemplo), en este caso mapea con 
+ objeto.atributo dónde se va a guardar el value de lo que se elija en los options
+En placeholder (normalmente va un texto quuiero que aparezca atenuado en el campo antes de 
+ escribir), en este caso mapea con el objeto dónde se guardar el value de lo que se elija en los options 
+Option: da opción
+th:each es como hacer un for recorriendo locales y cada local se guarda en l (cada vuelta es una opción)
+th:value es lo que se va a enviar desde el select cuando se elija la opción
+th:text es el texto que se muestra como opción
+
+Como local1 y local2 son atributos de un Objeto de la Clase LocalesModel dónde haya un 
+ @RequestMapping(value="/obtenerDistancia",method=RequestMethod.POST) se recibirá de form un
+ un LocalesModel objeto cargado 2 con atributos (LocalModel local1 y LocalModel local2)...
+ local1 y local2 solo van a tener un id cargado
+-->

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculo de distancia</title>
+<style type="text/css">
+div {
+	background: #2271B3;
+/*	color: #fff;*/
+/*	font-size: 30px;*/
+    margin: 30px;
+    padding:30px; /*da un margen interior 30px a los 4 lados*/
+    border:5px solid #000; /* da un borde de 5 px solido negro...*/
+	float: left;
+}
+
+.posRelativa {
+    position: fixed;  /*con esta linea hago que se mantenga la imagen fija aunque
+                                            	me deslize con la barra lateral*/ 
+	botton: 0;
+	right: 0;
+}
+</style>
+
+</head>
+<body>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Direccion</th>
+					<th>Latitud</th>
+					<th>Longitud</th>
+					<th>Telefono</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				<tr th:each="local : ${locales}">
+					<td><span th:text="${local.idLocal}" /></td>
+					<td><span th:text="${local.direccion}" /></td>
+					<td><span th:text="${local.latitud}" /></td>
+					<td><span th:text="${local.longitud}" /></td>
+					<td><span th:text="${local.telefono}" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="posRelativa">
+		<h3>Ingrese los ID's de los locales cuya distancia quiere
+			calcular</h3>
+		<form action="calculodistResult" method="Post">
+			<p>
+				ID primer local: <input name="id1" type="int" /> <br />
+			</p>
+			<p>
+				ID segundo local: <input name="id2" type="int" /> <br />
+			</p>
+			<input type="submit" />
+
+		</form>
+	</div>
+</body>
+
+</html>
+
+<!-- con la tabla muestro la lista de locales
+     con el form pido y envio dos int -->

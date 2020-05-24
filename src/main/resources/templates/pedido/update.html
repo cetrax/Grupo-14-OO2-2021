@@ -1,0 +1,19 @@
+<form action="#" th:action="@{/pedidos/update}"
+	th:object="${pedido}" method="post">
+	<input type="hidden" th:field="*{idPedido}" />
+	</p>
+		<p> Pedido: <input type="text" th:field="*{producto.nombre}" /> </p>
+		<p> Cantidad: <input type="number" th:field="*{cantidad}" /> </p>
+		<p>	Cliente: <input type="text" th:field="*{cliente.nombre}" /> </p>
+		<p>	Vendedor Original: <input type="text" th:field="*{vendedorOriginal.nombre}" /> </p>
+		<p>	Vendedor Auxiliar: <input type="text" th:field="*{vendedorAuxiliar.nombre}" /> </p>
+		<p>	Aceptado?: <input type="checkbox" th:field="*{aceptado}" /> </p>
+		<br/>
+		<input type="submit" value="Edit" />
+</form>
+
+<form action="#"
+	th:action="@{/pedidos/delete/{id}(id=${pedido.idPedido})}"
+	method="post">
+	<input type="submit" value="Delete Pedido" />
+</form>

@@ -1,0 +1,16 @@
+<form action="#" th:action="@{/lotes/update}"
+	th:object="${lote}" method="post">
+	<input type="hidden" th:field="*{idLote}" />
+	</p>
+	<p> CantidadInicial: <input type="text" th:field="*{cantidadInicial}" /> </p>
+	<p> CantidadActual: <input type="text" th:field="*{cantidadActual}" /> </p>
+	<p> FechaIngreso: <input type="date" th:field="*{fechaIngreso}" /> </p>
+	<p> Estado: <input type="checkbox" th:field="*{estado}" /> </p>
+		value="Edit" />
+</form>
+
+<form action="#"
+	th:action="@{/lotes/delete/{id}(id=${lote.idLote})}"
+	method="post">
+	<input type="submit" value="Delete Lote" />
+</form>
