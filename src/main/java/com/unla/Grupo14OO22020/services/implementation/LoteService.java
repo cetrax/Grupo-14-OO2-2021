@@ -51,9 +51,11 @@ public class LoteService implements ILoteService{
 	public LoteModel Insert(LoteModel loteModel) {
 		
 		Localito l1=localRepository.findByIdLocal(loteModel.getLocal().getIdLocal());
+		
 		Stock stock=l1.getStock();
 		if(stock==null ){
 			stock=stockRepository.save(new Stock(loteModel.getCantidadInicial()));
+			l1.setStock(stock);
 		}
 		Lote lote=loteConverter.modelToEntity(loteModel); 
 		lote.setStock(stock);

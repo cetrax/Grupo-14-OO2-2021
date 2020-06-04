@@ -1,10 +1,12 @@
 package com.unla.Grupo14OO22020.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,7 +30,10 @@ public class Localito {
 	@Column(name = "telefono")
 	private long telefono;
 	
-	@OneToOne(mappedBy = "local")
+	//@OneToOne(mappedBy = "local")
+	//esto es lo que agregamos nuev0
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_stock", referencedColumnName = "idStock")
     private Stock stock;
 	
 	public Localito(){

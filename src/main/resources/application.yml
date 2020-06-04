@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost/test?serverTimezone=UTC
     username: root
-    password: root
+    password: dolape8755
   jpa:
     show-sql: true
     hibernate:

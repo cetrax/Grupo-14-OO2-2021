@@ -18,7 +18,7 @@
 			<tr th:each="stock : ${stocks}">
 				<td><span th:text="${stock.idStock}" /></td>
 				<td><span th:text="${stock.cantidad}" /></td>
-				<td><span th:text="${stock.Lote.idLote}" /></td>
+				<td><span th:text="${stock.lotes}" /></td>
 				<td><a th:href="@{/stocks/{id}(id=${stock.idStock})}">Ver</a></td>
 	
 			</tr>

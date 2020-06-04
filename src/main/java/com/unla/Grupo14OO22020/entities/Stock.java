@@ -32,6 +32,8 @@ public class Stock {
     @JoinColumn(name = "id_local", referencedColumnName = "idLocal")
     private Localito local;
 	
+	
+	
 	public Stock(int idStock, int cantidad,Set<Lote> lotes) {
 		super();
 		this.idStock = idStock;
