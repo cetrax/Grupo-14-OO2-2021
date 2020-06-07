@@ -7,13 +7,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.unla.Grupo14OO22020.converters.LoteConverter;
-import com.unla.Grupo14OO22020.entities.Localito;
 import com.unla.Grupo14OO22020.entities.Lote;
-import com.unla.Grupo14OO22020.entities.Stock;
 import com.unla.Grupo14OO22020.models.LoteModel;
 import com.unla.Grupo14OO22020.repositories.ILocalRepository;
 import com.unla.Grupo14OO22020.repositories.ILoteRepository;
-import com.unla.Grupo14OO22020.repositories.IStockRepository;
 import com.unla.Grupo14OO22020.services.ILoteService;
 import com.unla.Grupo14OO22020.services.IProductoService;
 
@@ -26,9 +23,6 @@ public class LoteService implements ILoteService{
 	@Qualifier("loteRepository")
 	private ILoteRepository loteRepository;
 	//injeccion de dependencias
-	@Autowired
-	@Qualifier("stockRepository")
-	private IStockRepository stockRepository;
 	
 	@Autowired
 	@Qualifier("localRepository")
@@ -50,13 +44,8 @@ public class LoteService implements ILoteService{
 	@Override
 	public LoteModel Insert(LoteModel loteModel) {
 		
-		Localito l1=localRepository.findByIdLocal(loteModel.getLocal().getIdLocal());
-		Stock stock=l1.getStock();
-		if(stock==null ){
-			stock=stockRepository.save(new Stock(loteModel.getCantidadInicial()));
-		}
+		
 		Lote lote=loteConverter.modelToEntity(loteModel); 
-		lote.setStock(stock);
 		lote = loteRepository.save(lote);
 		
 		return loteConverter.entityToModel(lote);

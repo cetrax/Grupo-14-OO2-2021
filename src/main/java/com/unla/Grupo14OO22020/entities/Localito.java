@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,8 +27,6 @@ public class Localito {
 	@Column(name = "telefono")
 	private long telefono;
 	
-	@OneToOne(mappedBy = "local")
-    private Stock stock;
 	
 	public Localito(){
 		
@@ -85,13 +82,6 @@ public class Localito {
 	}
 
 	
-	public Stock getStock() {
-		return stock;
-	}
-
-	public void setStock(Stock stock) {
-		this.stock = stock;
-	}
 
 	@Override
 	public String toString() {

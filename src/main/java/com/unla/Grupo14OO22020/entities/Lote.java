@@ -5,12 +5,9 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -44,11 +41,6 @@ public class Lote {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Producto producto;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_stock", nullable=false)
-	private Stock stock;
-	
-
 	public Lote() {
 
 	}
@@ -112,14 +104,6 @@ public class Lote {
 		this.producto = producto;
 	}
 
-	
-	public Stock getStock() {
-		return stock;
-	}
-
-	public void setStock(Stock stock) {
-		this.stock = stock;
-	}
 
 	@Override
 	public String toString() {

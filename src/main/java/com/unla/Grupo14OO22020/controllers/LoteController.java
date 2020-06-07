@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.unla.Grupo14OO22020.entities.Lote;
 import com.unla.Grupo14OO22020.helpers.ViewRouteHelpers;
 import com.unla.Grupo14OO22020.models.LoteModel;
+import com.unla.Grupo14OO22020.repositories.ILoteRepository;
 import com.unla.Grupo14OO22020.services.ILocalService;
 import com.unla.Grupo14OO22020.services.ILoteService;
 import com.unla.Grupo14OO22020.services.IProductoService;
@@ -35,12 +37,18 @@ public class LoteController {
 	@Qualifier("localService")
 	private ILocalService localService;
 	
+	//Prueba
+	@Autowired
+	@Qualifier("loteRepository")
+	private ILoteRepository loteRepository;
+	
+	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOTE_INDEX);
 		mAV.addObject("lotes", loteService.getAll());
 		mAV.addObject("lote", new LoteModel());
-		
+		mAV.addObject("stock",loteRepository.calcularStock());
 		return mAV;
 	}
 	
@@ -81,5 +89,11 @@ public class LoteController {
 		return new RedirectView(ViewRouteHelpers.LOTE_ROOT);
 	}	
 	
+	
+	@GetMapping("/stock")
+	public int stock() {
+		System.out.println(loteRepository.calcularStock());
+	    return loteRepository.calcularStock();
+	}
 
 }
