@@ -48,7 +48,13 @@ public class LoteController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOTE_INDEX);
 		mAV.addObject("lotes", loteService.getAll());
 		mAV.addObject("lote", new LoteModel());
+		//Si no hay lotes cargados el stock es 0
+		try {
 		mAV.addObject("stock",loteRepository.calcularStock());
+		}
+		catch(Exception e){
+			mAV.addObject("stock",0);
+		}
 		return mAV;
 	}
 	
