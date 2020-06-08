@@ -16,6 +16,7 @@ import com.unla.Grupo14OO22020.models.LoteModel;
 import com.unla.Grupo14OO22020.services.ILocalService;
 import com.unla.Grupo14OO22020.services.ILoteService;
 import com.unla.Grupo14OO22020.services.IProductoService;
+import com.unla.Grupo14OO22020.services.IStockService;
 
 
 
@@ -31,9 +32,14 @@ public class LoteController {
 	@Qualifier("productoService")
 	private IProductoService productoService;
 	
+	
 	@Autowired
 	@Qualifier("localService")
 	private ILocalService localService;
+	
+	@Autowired
+	@Qualifier("stockService")
+	private IStockService stockService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
@@ -49,8 +55,7 @@ public class LoteController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOTE_ADD);
 		mAV.addObject("lote", new LoteModel());
 		mAV.addObject("productos", productoService.getAll());
-		mAV.addObject("locales",localService.getAll());
-		
+		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
 	

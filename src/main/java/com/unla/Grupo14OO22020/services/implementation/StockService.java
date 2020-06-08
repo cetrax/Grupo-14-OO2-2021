@@ -1,15 +1,20 @@
 package com.unla.Grupo14OO22020.services.implementation;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import com.unla.Grupo14OO22020.converters.LoteConverter;
 import com.unla.Grupo14OO22020.converters.StockConverter;
-import com.unla.Grupo14OO22020.entities.Localito;
+import com.unla.Grupo14OO22020.entities.Lote;
 import com.unla.Grupo14OO22020.entities.Stock;
+import com.unla.Grupo14OO22020.models.LoteModel;
 import com.unla.Grupo14OO22020.models.StockModel;
 import com.unla.Grupo14OO22020.repositories.IStockRepository;
+import com.unla.Grupo14OO22020.services.ILocalService;
 import com.unla.Grupo14OO22020.services.ILoteService;
 import com.unla.Grupo14OO22020.services.IStockService;
 
@@ -25,8 +30,16 @@ public class StockService implements IStockService{
 	private StockConverter stockConverter;
 	
 	@Autowired
+	@Qualifier("loteConverter")
+	private LoteConverter loteConverter;
+	
+	@Autowired
 	@Qualifier("loteService")
 	private ILoteService loteService;
+	
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
 	
 	@Override
 	public List<Stock> getAll() {
@@ -42,7 +55,9 @@ public class StockService implements IStockService{
 	
 	@Override
 	public StockModel Update(StockModel stockModel) {		
-		Stock stock = stockRepository.save(stockConverter.modelToEntity(stockModel));
+		Stock stockOrigin = stockConverter.modelToEntity(stockModel);
+		stockOrigin.setCantidad(stockModel.getCantidad());
+		Stock stock = stockRepository.save(stockOrigin);
 		return stockConverter.entityToModel(stock);
 	}
 	

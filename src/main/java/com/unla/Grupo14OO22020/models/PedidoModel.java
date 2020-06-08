@@ -14,9 +14,6 @@ public class PedidoModel {
 	private float subtotal;
 	private boolean aceptado;
 	
-	
-
-
 
 	public PedidoModel(int idPedido, ProductoModel producto, int cantidad, ClienteModel cliente2,
 			EmpleadoModel empleado, EmpleadoModel empleado2, boolean aceptado) {

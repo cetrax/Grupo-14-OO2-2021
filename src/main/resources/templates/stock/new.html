@@ -10,7 +10,7 @@
 		<!--  <p> Cantidad: <span th:text="${lote.idLote}"/> </p> --> 
 		
 		<p> Lotes:  
-		    <select placeholder="Lote" th:field="*{lotes.Lote.idLote}"> <!-- la lista deberia mostrar el nomnbre del producto de ese lote -->
+		    <select placeholder="Lote" th:field="*{lotes}"> <!-- la lista deberia mostrar el nomnbre del producto de ese lote -->
 				<option th:each="l: ${lotes}" th:value="${l.idLote}" th:text="${l.idLote}"></option>
 			</select> </p>
 		<br/>

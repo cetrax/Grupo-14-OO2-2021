@@ -1,5 +1,7 @@
 package com.unla.Grupo14OO22020.models;
 
+import org.springframework.lang.Nullable;
+
 public class LocalModel{
 
 	private int idLocal;
@@ -7,18 +9,25 @@ public class LocalModel{
 	private double latitud;
 	private double longitud;
 	private long telefono;
-
+    @Nullable
+	private StockModel stockModel;
+    
 	public LocalModel(){
 
 	}
 
-	public LocalModel(int idLocal, String direccion, double latitud, double longitud, long telefono) {
+	
+	public LocalModel(int idLocal, String direccion, double latitud, double longitud, long telefono,
+			StockModel stockModel) {
 		this.idLocal = idLocal;
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.telefono = telefono;
+		this.stockModel = stockModel;
 	}
+
+
 
 	public int getIdLocal() {
 		return idLocal;
@@ -58,6 +67,14 @@ public class LocalModel{
 
 	public void setTelefono(long telefono) {
 		this.telefono = telefono;
+	}
+	
+	public StockModel getStockModel() {
+		return stockModel;
+	}
+
+	public void setStockModel(StockModel stockModel) {
+		this.stockModel = stockModel;
 	}
 
 	@Override

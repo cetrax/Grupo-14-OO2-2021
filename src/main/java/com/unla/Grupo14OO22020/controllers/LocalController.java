@@ -44,7 +44,6 @@ formulario a un método java (será con GET) y la que lo procesa a otro distinto
 	public ModelAndView crear() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOCAL_ADD);
 		mAV.addObject("local", new Localito());
-
 		return mAV;
 	}
 
