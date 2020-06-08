@@ -25,21 +25,22 @@ public class Stock {
 	@Column(name = "cantidad")
 	private int cantidad;
 	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="stock")
-	private Set<Lote> lotes=new HashSet<Lote>();
-	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_local", referencedColumnName = "idLocal")
     private Localito local;
 	
-	public Stock(int idStock, int cantidad,Set<Lote> lotes) {
-		super();
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="stock")
+	private Set<Lote> lotes=new HashSet<Lote>();
+
+	
+	public Stock() {}	
+	
+	public Stock(int idStock, int cantidad, Localito local) {
 		this.idStock = idStock;
 		this.cantidad = cantidad;
-		this.lotes=lotes;
+		this.local = local;
 	}
-	
-	public Stock() {}
+
 	
 	public Stock(int cantidad)
 	{
@@ -77,9 +78,5 @@ public class Stock {
 	public void setLocal(Localito local) {
 		this.local = local;
 	}
-	
-	
-	
-	
 	
 }

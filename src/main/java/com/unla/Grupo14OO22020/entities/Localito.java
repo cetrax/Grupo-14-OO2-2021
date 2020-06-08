@@ -2,11 +2,14 @@ package com.unla.Grupo14OO22020.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name="local")
@@ -28,21 +31,24 @@ public class Localito {
 	@Column(name = "telefono")
 	private long telefono;
 	
-	@OneToOne(mappedBy = "local")
+	@Nullable
+	@OneToOne(fetch=FetchType.LAZY)
     private Stock stock;
 	
 	public Localito(){
 		
 	}
 	
-	public Localito(int idLocal, String direccion, double latitud, double longitud, long telefono) {
-		super();
+	public Localito(int idLocal, String direccion, double latitud, double longitud, long telefono, Stock stock) {
 		this.idLocal = idLocal;
 		this.direccion = direccion;
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.telefono = telefono;
+		this.stock = stock;
 	}
+
+
 
 	public int getIdLocal() {
 		return idLocal;
@@ -84,7 +90,7 @@ public class Localito {
 		this.telefono = telefono;
 	}
 
-	
+
 	public Stock getStock() {
 		return stock;
 	}
@@ -98,8 +104,5 @@ public class Localito {
 		return "Local [idLocal=" + idLocal + ", direccion=" + direccion + ", latitud=" + latitud + ", longitud="
 				+ longitud + ", telefono=" + telefono + "]";
 	}
-	
-	
-	
 
-}
+}//fin class

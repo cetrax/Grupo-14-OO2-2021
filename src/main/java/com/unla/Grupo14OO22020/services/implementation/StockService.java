@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.unla.Grupo14OO22020.converters.StockConverter;
-import com.unla.Grupo14OO22020.entities.Localito;
 import com.unla.Grupo14OO22020.entities.Stock;
 import com.unla.Grupo14OO22020.models.StockModel;
 import com.unla.Grupo14OO22020.repositories.IStockRepository;

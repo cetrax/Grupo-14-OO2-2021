@@ -8,13 +8,14 @@
 	<form action="#" th:action="@{/stocks/update}" th:object="${stock}" method="post">
 		<input type="hidden" th:field="*{idStock}" />
 
+		
 		<p>
-			Lotes: <select placeholder="Lote" th:field="*{lote.idLote}">
+.			Lotes: <select placeholder="lotes" th:field="*{lotes}">
 				<option th:each="l: ${lotes}" th:value="${l.idLote}"
 					th:text="${l.idLote}"></option>
 			</select>
 		</p>
-
+		
 		<input type="submit" value="Edit" />
 
 	</form>

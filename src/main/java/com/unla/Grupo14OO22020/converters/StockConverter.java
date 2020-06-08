@@ -13,13 +13,16 @@ public class StockConverter {
 	@Qualifier("loteConverter")
 	private LoteConverter loteConverter;
 	
+	@Autowired
+	@Qualifier("localConverter")
+	private LocalConverter localConverter;
+	
 	public StockModel entityToModel(Stock stock) {
-		
-		return new StockModel(stock.getIdStock(),stock.getCantidad(),stock.getLotes());
+		return new StockModel(stock.getIdStock(),stock.getCantidad(), localConverter.entityToModel(stock.getLocal()));
 	}
 	
 	public Stock modelToEntity(StockModel stockModel) {
-		return new Stock(stockModel.getIdStock(),stockModel.getCantidad(),stockModel.getLotes());
+		return new Stock(stockModel.getIdStock(),stockModel.getCantidad(),localConverter.modelToEntity(stockModel.getLocal()));
 	}
 
 }

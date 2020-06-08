@@ -9,6 +9,7 @@
 		<thead>
 			<tr>
 				<th>idStock</th>
+               <th>Local</th>				
 				<th>cantidad</th>
 				<th>lotes</th>
 			</tr>
@@ -17,16 +18,20 @@
 		<tbody>
 			<tr th:each="stock : ${stocks}">
 				<td><span th:text="${stock.idStock}" /></td>
+				<td><span th:text="${stock.local.direccion}" /></td>
 				<td><span th:text="${stock.cantidad}" /></td>
-				<td><span th:text="${stock.Lote.idLote}" /></td>
-				<td><a th:href="@{/stocks/{id}(id=${stock.idStock})}">Ver</a></td>
-	
+				<td><select><option th:each="sl: ${stock.lotes}" th:value="${sl.idLote}" th:text="${sl.cantidadActual}+'<->'+${sl.producto.nombre}"></select></td>	
 			</tr>
 		</tbody>
 	</table>
 
-	<a th:href="@{/stocks/new}">agregar</a>
-
 </body>
 
 </html>
+
+<!-- 
+<select placeholder="stock.lotes"	th:field="*{stock.lotes.idLote}">
+	<option th:each="l: ${stock.lotes}"	th:text="${l.Producto.nombre}"></option>
+</select>
+			
+ -->
