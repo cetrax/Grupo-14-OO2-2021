@@ -14,19 +14,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.unla.Grupo14OO22020.converters.LocalConverter;
 import com.unla.Grupo14OO22020.entities.Localito;
 import com.unla.Grupo14OO22020.helpers.ViewRouteHelpers;
 import com.unla.Grupo14OO22020.models.LocalModel;
 import com.unla.Grupo14OO22020.models.LocalesModel;
+import com.unla.Grupo14OO22020.repositories.ILocalRepository;
+import com.unla.Grupo14OO22020.repositories.ILoteRepository;
 import com.unla.Grupo14OO22020.services.ILocalService;
+import com.unla.Grupo14OO22020.services.ILoteService;
 
 @Controller
 @RequestMapping("/locales")
 public class LocalController {
 
 	@Autowired
+	@Qualifier("localRepository")
+	private ILocalRepository localRepository;
+	
+	@Autowired
+	@Qualifier("localConverter")
+	private LocalConverter localConverter;
+	
+	@Autowired
 	@Qualifier("localService")
 	private ILocalService localService;
+	
+	@Autowired
+	@Qualifier("loteService")
+	private ILoteService loteService;
+	
+	@Autowired
+	@Qualifier("loteRepository")
+	private ILoteRepository loteRepository;
+	
 
 	/*NOTA: Mediante la anotación @RequestMapping mapearemos la petición que muestra el 
 formulario a un método java (será con GET) y la que lo procesa a otro distinto (POST):*/
@@ -36,7 +57,13 @@ formulario a un método java (será con GET) y la que lo procesa a otro distinto
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOCAL_INDEX);
 		mAV.addObject("locales", localService.getAll());
 		mAV.addObject("local", new LocalModel());
-
+		try {
+			mAV.addObject("stock",localRepository.calculoStock());
+		}catch(Exception e)
+		{
+			mAV.addObject("stock",0);
+		}
+		
 		return mAV;
 	}
 
@@ -44,13 +71,12 @@ formulario a un método java (será con GET) y la que lo procesa a otro distinto
 	public ModelAndView crear() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOCAL_ADD);
 		mAV.addObject("local", new Localito());
-
 		return mAV;
 	}
 
 	@PostMapping("/create")
 	public RedirectView agregar(@ModelAttribute(name="locales") LocalModel local ) {
-		localService.insertOrUpdate(local);
+		localService.insert(local);
 		return new RedirectView(ViewRouteHelpers.LOCAL_ROOT);
 	}
 
@@ -69,7 +95,7 @@ formulario a un método java (será con GET) y la que lo procesa a otro distinto
 
 	@PostMapping("/update")
 	public RedirectView update(@ModelAttribute("local") LocalModel localModel) {
-		localService.insertOrUpdate(localModel);
+		localService.update(localModel);
 		return new RedirectView(ViewRouteHelpers.LOCAL_ROOT);
 	}
 

@@ -11,6 +11,7 @@ import com.unla.Grupo14OO22020.entities.Localito;
 import com.unla.Grupo14OO22020.models.LocalModel;
 import com.unla.Grupo14OO22020.repositories.ILocalRepository;
 import com.unla.Grupo14OO22020.services.ILocalService;
+import com.unla.Grupo14OO22020.services.ILoteService;
 
 @Service("localService")
 public class LocalService implements ILocalService{
@@ -22,15 +23,27 @@ public class LocalService implements ILocalService{
 	@Autowired
 	@Qualifier("localConverter")
 	private LocalConverter localConverter;
+	@Autowired
+	@Qualifier("loteService")
+	private ILoteService loteService;
 
 	@Override
 	public List<Localito> getAll() {
 		return localRepository.findAll();
 	}
+	
+	@Override
+	public LocalModel insert(LocalModel localModel) {
+		Localito local = localRepository.save(localConverter.modelToEntity(localModel));
+		return localConverter.entityToModel(local);
+	}
+	
 
 	@Override
-	public LocalModel insertOrUpdate(LocalModel localModel) {
-		Localito local = localRepository.save(localConverter.modelToEntity(localModel));
+	public LocalModel update(LocalModel localModel) {
+		Localito localOrig =localRepository.findByIdLocal(localModel.getIdLocal());
+		localOrig.setStockCantidad(localModel.getStockCantidad());
+		Localito local = localRepository.save(localOrig);
 		return localConverter.entityToModel(local);
 	}
 	

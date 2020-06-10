@@ -13,6 +13,8 @@
 				<th>Latitud</th>
 				<th>Longitud</th>
 				<th>Telefono</th>
+				<th>Stock total</th>
+				
 			</tr>
 
 		</thead>
@@ -23,6 +25,7 @@
 				<td><span th:text="${local.latitud}" /></td>
 				<td><span th:text="${local.longitud}" /></td>
 				<td><span th:text="${local.telefono}" /></td>
+				<td><span th:text="${stock[local.idLocal-1]}" /></td>
 				<td><a th:href="@{/locales/{id}(id=${local.idLocal})}">Ver</a></td>
 
 			</tr>

@@ -19,6 +19,7 @@ import com.unla.Grupo14OO22020.services.IProductoService;
 
 
 
+
 @Controller
 @RequestMapping("/lotes")
 public class LoteController {
@@ -35,12 +36,12 @@ public class LoteController {
 	@Qualifier("localService")
 	private ILocalService localService;
 	
+	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOTE_INDEX);
 		mAV.addObject("lotes", loteService.getAll());
 		mAV.addObject("lote", new LoteModel());
-		
 		return mAV;
 	}
 	
@@ -49,8 +50,7 @@ public class LoteController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOTE_ADD);
 		mAV.addObject("lote", new LoteModel());
 		mAV.addObject("productos", productoService.getAll());
-		mAV.addObject("locales",localService.getAll());
-		
+		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
 	
