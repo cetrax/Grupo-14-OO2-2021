@@ -21,12 +21,12 @@
 		    <select placeholder="Empleado" th:field="*{vendedorOriginal.idPersona}">
 				<option th:each="e: ${empleados}" th:value="${e.idPersona}" th:text="${e.nombre}"></option>
 			</select> </p>
-		
+ 		
 		<p> Vendedor Auxiliar: 
 		      <select placeholder="Empleado" th:field="*{vendedorAuxiliar.idPersona}">
 				<option th:each="e: ${empleados}" th:value="${e.idPersona}" th:text="${e.nombre}"></option>
 			  </select> </p>
-		
+	
 		<p> Aceptado?: <input type="checkbox" th:field="*{aceptado}" /> </p> 
 		<br/>
 		<br/>

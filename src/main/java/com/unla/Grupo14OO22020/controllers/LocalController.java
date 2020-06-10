@@ -14,19 +14,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.unla.Grupo14OO22020.entities.Localito;
+import com.unla.Grupo14OO22020.entities.Local;
+import com.unla.Grupo14OO22020.entities.Lote;
 import com.unla.Grupo14OO22020.helpers.ViewRouteHelpers;
 import com.unla.Grupo14OO22020.models.LocalModel;
 import com.unla.Grupo14OO22020.models.LocalesModel;
+import com.unla.Grupo14OO22020.repositories.ILocalRepository;
+import com.unla.Grupo14OO22020.repositories.ILoteRepository;
 import com.unla.Grupo14OO22020.services.ILocalService;
+import com.unla.Grupo14OO22020.services.ILoteService;
+
 
 @Controller
 @RequestMapping("/locales")
 public class LocalController {
 
 	@Autowired
+	@Qualifier("localRepository")
+	private ILocalRepository localRepository;
+	
+	@Autowired
 	@Qualifier("localService")
 	private ILocalService localService;
+	
+	@Autowired
+	@Qualifier("loteRepository")
+	private ILoteRepository loteRepository;
+	
+	@Autowired
+	@Qualifier("loteService")
+	private ILoteService loteService;
+	
 
 	/*NOTA: Mediante la anotación @RequestMapping mapearemos la petición que muestra el 
 formulario a un método java (será con GET) y la que lo procesa a otro distinto (POST):*/
@@ -36,15 +54,13 @@ formulario a un método java (será con GET) y la que lo procesa a otro distinto
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOCAL_INDEX);
 		mAV.addObject("locales", localService.getAll());
 		mAV.addObject("local", new LocalModel());
-
 		return mAV;
 	}
 
 	@GetMapping("/new")
 	public ModelAndView crear() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOCAL_ADD);
-		mAV.addObject("local", new Localito());
-
+		mAV.addObject("local", new Local());
 		return mAV;
 	}
 
@@ -59,10 +75,23 @@ formulario a un método java (será con GET) y la que lo procesa a otro distinto
 		localService.remove(id);
 		return new RedirectView(ViewRouteHelpers.LOCAL_ROOT);
 	}
+	
+	
+	public int calcularStockDelLocal(int idLocal) {
+         int stock = 0;
+       	 for(Lote lote:loteService.getAll()){//traigo todoss los lotes de un local
+               if(lote.getLocal().getIdLocal()==idLocal) {        		
+       		   stock += lote.getCantidadActual(); //sumo la cantidadActual de todos los lotes del local
+              }	
+       	 }
+		return stock;
+	}
 
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int idLocal) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOCAL_UPDATE);
+		mAV.addObject("stock", calcularStockDelLocal(idLocal));
+		mAV.addObject("lotes", loteService.lostesPorLocal(idLocal));
 		mAV.addObject("local", localService.findByIdLocal(idLocal));
 		return mAV;
 	}

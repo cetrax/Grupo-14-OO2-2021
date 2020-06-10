@@ -7,13 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;//import javax.persistence.Table;  //lo cambie para que en la base datos me haga persona, cliente y empleado en 3 tablas separadas
+import javax.persistence.InheritanceType;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="persona")
-public abstract class Persona {
+@Inheritance(strategy = InheritanceType.JOINED) // Crea tablas de herencia aparte y no un DTYPE    // antes lo teniamos así @Table(name="persona")
+public class Persona {//para que en la base datos me haga persona, cliente y empleado en 3 tablas separadas no iba abstract 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

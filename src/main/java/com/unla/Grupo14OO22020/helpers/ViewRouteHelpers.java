@@ -48,8 +48,6 @@ public class ViewRouteHelpers {
 	public final static String LOTE_INDEX = "lote/index";
 	
 	//Stock
-	public final static String STOCK_UPDATE = "stock/update";
-	public final static String STOCK_ADD = "stock/new";
 	public final static String STOCK_INDEX = "stock/index";
 	
 
