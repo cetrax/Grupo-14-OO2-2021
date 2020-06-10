@@ -4,9 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name="empleado")//esto ahora si va, para que en la BD haga una tabla aparte de la de persona
 public class Empleado extends Persona{
 	
 	
@@ -51,5 +53,4 @@ public class Empleado extends Persona{
 		this.esGerente = esGerente;
 	}
 
-	
-}
+}//fin class

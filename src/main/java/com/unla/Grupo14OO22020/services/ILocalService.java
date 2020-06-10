@@ -9,8 +9,10 @@ public interface ILocalService {
 
 	public abstract List<Localito> getAll();
 
-	public LocalModel insertOrUpdate(LocalModel localModel);
+	public LocalModel insert(LocalModel localModel);
 
+	public LocalModel update(LocalModel localModel);
+	
 	public LocalModel findByIdLocal(int id);
 
 	public boolean remove(int id);

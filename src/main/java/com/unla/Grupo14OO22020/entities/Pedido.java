@@ -3,6 +3,7 @@ package com.unla.Grupo14OO22020.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,11 +33,11 @@ public class Pedido {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Cliente cliente;
 	
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(fetch=FetchType.LAZY)
 	private Empleado vendedorOriginal;
 	
 	@Nullable
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(fetch=FetchType.LAZY)
 	private Empleado vendedorAuxiliar;
 	
 	
@@ -147,5 +148,6 @@ public class Pedido {
 	public float CalcularSubtotal() {
 		return producto.getPrecio()*cantidad;
 	}
+
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.Grupo14OO22020.helpers.ViewRouteHelpers;
 import com.unla.Grupo14OO22020.models.PedidoModel;
+import com.unla.Grupo14OO22020.repositories.IPedidoRepository;
 import com.unla.Grupo14OO22020.services.IClienteService;
 import com.unla.Grupo14OO22020.services.IEmpleadoService;
 import com.unla.Grupo14OO22020.services.IPedidoService;
@@ -31,6 +32,10 @@ public class PedidoController {
 	private IProductoService productoService;
 	
 	@Autowired
+	@Qualifier("pedidoRepository")
+	private IPedidoRepository pedidoRepository;
+	
+	@Autowired
 	@Qualifier("clienteService")
 	private IClienteService clienteService;
 	
@@ -43,6 +48,7 @@ public class PedidoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.PEDIDO_INDEX);
 		mAV.addObject("pedidos", pedidoService.getAll());
 		mAV.addObject("pedido", new PedidoModel());
+		mAV.addObject("subtotal",pedidoRepository.calcularSubtotal());
 		
 		return mAV;
 	}
