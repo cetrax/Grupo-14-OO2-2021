@@ -32,9 +32,6 @@ public class Lote {
 	@Column(name = "cantidadActual")
 	private int cantidadActual;
 
-	@Column(name = "estado")
-	private boolean estado;
-
 	
 	@Column(name = "fechaIngreso")
 	@CreationTimestamp
@@ -44,24 +41,27 @@ public class Lote {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Producto producto;
 	
+	@Column(name = "estado")
+	private boolean estado;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_stock", nullable=false)
-	private Stock stock;
+	@JoinColumn(name="id_local", nullable=false)
+    private Local local;
 	
 
-	public Lote() {
+	public Lote() {	}
 
-	}
-
-	public Lote (int idLote,int cantidadInicial, int cantidadActual, LocalDate fechaIngreso, Producto producto, boolean estado) {
+	public Lote(int idLote, int cantidadInicial, int cantidadActual, LocalDate fechaIngreso, Producto producto,
+			boolean estado) {
 		this.idLote = idLote;
 		this.cantidadInicial = cantidadInicial;
 		this.cantidadActual = cantidadActual;
 		this.fechaIngreso = fechaIngreso;
 		this.producto = producto;
 		this.estado = true;
-		
 	}
+	
+	
 
 	public int getIdLote() {
 		return idLote;
@@ -87,14 +87,6 @@ public class Lote {
 		this.cantidadActual = cantidadActual;
 	}
 
-	public boolean isEstado() {
-		return estado;
-	}
-
-	public void setEstado(boolean estado) {
-		this.estado = estado;
-	}
-
 	public LocalDate getFechaIngreso() {
 		return fechaIngreso;
 	}
@@ -102,8 +94,7 @@ public class Lote {
 	public void setFechaIngreso(LocalDate fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
-	
-	
+
 	public Producto getProducto() {
 		return producto;
 	}
@@ -112,28 +103,20 @@ public class Lote {
 		this.producto = producto;
 	}
 
-	
-	public Stock getStock() {
-		return stock;
+	public boolean isEstado() {
+		return estado;
 	}
 
-	public void setStock(Stock stock) {
-		this.stock = stock;
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
-	@Override
-	public String toString() {
-		return "Lote [idLote=" + idLote + ", cantidadInicial=" + cantidadInicial + ", cantidadActual=" + cantidadActual
-				+ ", estado=" + estado + ", fechaIngreso=" + fechaIngreso + ", Producto=" + producto + "]";
+	public Local getLocal() {
+		return local;
 	}
 
-	
-
-	
-
-
-	
-
-
+	public void setLocal(Local local) {
+		this.local = local;
+	}
 
 }//Fin class

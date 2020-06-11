@@ -8,7 +8,9 @@ import com.unla.Grupo14OO22020.models.LoteModel;
 public interface ILoteService {
 
 	public abstract List<Lote> getAll();
-
+	
+	public List<Lote> lostesPorLocal(int idLocal);
+	
 	public LoteModel Insert(LoteModel loteModel);
 
 	public LoteModel Update(LoteModel loteModel);
