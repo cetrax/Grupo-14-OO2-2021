@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
 import com.unla.Grupo14OO22020.helpers.ViewRouteHelpers;
 import com.unla.Grupo14OO22020.models.PedidoModel;
+import com.unla.Grupo14OO22020.repositories.ILocalRepository;
+import com.unla.Grupo14OO22020.repositories.IPedidoRepository;
 import com.unla.Grupo14OO22020.services.IClienteService;
 import com.unla.Grupo14OO22020.services.IEmpleadoService;
+import com.unla.Grupo14OO22020.services.ILocalService;
 import com.unla.Grupo14OO22020.services.IPedidoService;
 import com.unla.Grupo14OO22020.services.IProductoService;
 
@@ -38,12 +40,24 @@ public class PedidoController {
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
 	
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
+	
+	@Autowired
+	@Qualifier("localRepository")
+	private ILocalRepository localRepository;
+	
+	@Autowired
+	@Qualifier("pedidoRepository")
+	private IPedidoRepository pedidoRepository;
+	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.PEDIDO_INDEX);
 		mAV.addObject("pedidos", pedidoService.getAll());
 		mAV.addObject("pedido", new PedidoModel());
-		
+		mAV.addObject("subtotal",pedidoRepository.calcularSubtotal());
 		return mAV;
 	}
 	
@@ -54,7 +68,7 @@ public class PedidoController {
 		mAV.addObject("productos", productoService.getAll());
 		mAV.addObject("clientes", clienteService.getAll());
 		mAV.addObject("empleados", empleadoService.getAll());
-
+		mAV.addObject("locales",localService.getAll());
 		return mAV;
 	}
 	
@@ -77,6 +91,7 @@ public class PedidoController {
 		mAV.addObject("clientes", clienteService.getAll());
 		mAV.addObject("empleados", empleadoService.getAll());
 		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("locales",localService.getAll());
 		return mAV;
 	}
 	

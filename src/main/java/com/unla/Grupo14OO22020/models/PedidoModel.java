@@ -13,13 +13,11 @@ public class PedidoModel {
 	private EmpleadoModel vendedorAuxiliar;
 	private float subtotal;
 	private boolean aceptado;
+	private LocalModel local;
 	
-	
-
-
 
 	public PedidoModel(int idPedido, ProductoModel producto, int cantidad, ClienteModel cliente2,
-			EmpleadoModel empleado, EmpleadoModel empleado2, boolean aceptado) {
+			EmpleadoModel empleado, EmpleadoModel empleado2, boolean aceptado,LocalModel local) {
 		super();
 		this.idPedido = idPedido;
 		this.producto = producto;
@@ -29,6 +27,7 @@ public class PedidoModel {
 		this.vendedorAuxiliar = empleado2;
 		this.aceptado = aceptado;
 		this.subtotal = CalcularSubtotal();
+		this.local=local;
 	}
 
 	public PedidoModel() {
@@ -102,8 +101,16 @@ public class PedidoModel {
 		this.subtotal = subtotal;
 	}
 
-
+		
 	
+	public LocalModel getLocal() {
+		return local;
+	}
+
+	public void setLocal(LocalModel local) {
+		this.local = local;
+	}
+
 	public float CalcularSubtotal() {
 		return producto.getPrecio()*cantidad;
 	}

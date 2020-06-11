@@ -12,6 +12,7 @@ import com.unla.Grupo14OO22020.models.PedidoModel;
 import com.unla.Grupo14OO22020.repositories.IPedidoRepository;
 import com.unla.Grupo14OO22020.services.IClienteService;
 import com.unla.Grupo14OO22020.services.IEmpleadoService;
+import com.unla.Grupo14OO22020.services.ILocalService;
 import com.unla.Grupo14OO22020.services.IPedidoService;
 import com.unla.Grupo14OO22020.services.IProductoService;
 
@@ -33,6 +34,10 @@ public class PedidoService implements IPedidoService{
 	@Autowired
 	@Qualifier("clienteService")
 	private IClienteService clienteService;
+	
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
 
 	@Autowired
 	@Qualifier("empleadoService")
@@ -55,6 +60,7 @@ public class PedidoService implements IPedidoService{
 		pedidoModel.setCliente(clienteService.findByIdPersona(pedidoModel.getCliente().getIdPersona()));
 		pedidoModel.setVendedorOriginal(empleadoService.findByIdPersona(pedidoModel.getVendedorOriginal().getIdPersona()));
 		pedidoModel.setVendedorAuxiliar(empleadoService.findByIdPersona(pedidoModel.getVendedorAuxiliar().getIdPersona()));
+		pedidoModel.setLocal(localService.findByIdLocal(pedidoModel.getLocal().getIdLocal()));
 		Pedido pedido = pedidoRepository.save(pedidoConverter.modelToEntity(pedidoModel));
 		return pedidoConverter.entityToModel(pedido);
 	}
