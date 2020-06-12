@@ -37,7 +37,5 @@ public class EmpleadoModel extends PersonaModel{
 	public void setEsGerente(boolean esGerente) {
 		this.esGerente = esGerente;
 	}
-
-
-
-}
+	
+}//fin class

@@ -14,6 +14,8 @@
 				<th>Cliente</th>
 				<th>Vendedor Original</th>
 				<th>Vendedor Auxiliar</th>
+				<th>Local</th>
+				<th>Subtotal</th>
 				<th>Aceptado?</th>
 			</tr>
 
@@ -26,6 +28,8 @@
 				<td><span th:text="${pedido.Cliente.nombre}" /></td>
 				<td><span th:text="${pedido.vendedorOriginal.nombre}" /></td>
 				<td><span th:if="${pedido.vendedorAuxiliar}" th:text="${pedido.vendedorAuxiliar.nombre} +' '+ ${pedido.vendedorAuxiliar.apellido}" /></td>
+				<td><span th:text="${pedido.Local.direccion}" /></td>
+				<td><span th:text="${subtotal[pedido.idPedido-1]}" /></td>
 				<td><span th:text="${pedido.aceptado}" /></td>
 				<td><a th:href="@{/pedidos/{id}(id=${pedido.idPedido})}">Ver</a></td>
 	
