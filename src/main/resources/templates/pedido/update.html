@@ -24,7 +24,7 @@
 			Cliente: <select placeholder="Cliente"
 				th:field="*{cliente.idPersona}">
 				<option th:each="c: ${clientes}" th:value="${c.idPersona}"
-					th:text="${c.nombre}"></option>
+					th:text="${c.nombre} +' '+ ${c.apellido}"></option>
 			</select>
 		</p>
 
@@ -32,7 +32,7 @@
 			Vendedor Original: <select placeholder="Empleado"
 				th:field="*{vendedorOriginal.idPersona}">
 				<option th:each="e: ${empleados}" th:value="${e.idPersona}"
-					th:text="${e.nombre}"></option>
+					th:text="${e.nombre} +' '+ ${e.apellido}"></option>
 			</select>
 		</p>
 
@@ -40,10 +40,14 @@
 			Vendedor Auxiliar: <select placeholder="Empleado"
 				th:field="*{vendedorAuxiliar.idPersona}">
 				<option th:each="e: ${empleados}" th:value="${e.idPersona}"
-					th:text="${e.nombre}"></option>
+					th:text="${e.nombre} +' '+ ${e.apellido}"></option>
 			</select>
 		</p>
-
+		<p> Elija el Local:  
+		    <select placeholder="Local" th:field="*{local.idLocal}">
+				<option th:each="l: ${locales}" th:value="${l.idLocal}" th:text="${l.idLocal}"></option>
+		  	</select> 
+		</p>			  
 		<p>
 			Aceptado?: <input type="checkbox" th:field="*{aceptado}" />
 		</p>
@@ -55,5 +59,34 @@
 		method="post">
 		<input type="submit" value="Delete Pedido" />
 	</form>
+	
+	
+<br/>
+<br/>
+<br/>
+<table>
+	<thead>
+		<tr>
+			<th>idLocal</th>
+			<th>Nombre/Direccion</th>
+			<th>Distancia desde el que se consulta</th>
+		</tr>
+
+	</thead>
+	<tbody>
+		<tr th:each="local : ${localesOrd}">
+    		<td><span th:text="${local.idLocal}"/></td>
+			<td><span th:text="${local.direccion}"/></td>
+			<td><span th:text="${local.latitud}"/></td>
+		</tr>
+	</tbody>
+</table>
+	
+
+    <br/>
+	<br/>
+	<br/>
+	<a th:href="@{/home}"> Volver al home</a>	
+	
 </body>
 </html>

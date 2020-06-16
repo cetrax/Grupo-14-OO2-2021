@@ -8,6 +8,7 @@
 	<table>
 		<thead>
 			<tr>
+			     <th>ID</th>
 				<th>Nombre</th>
 				<th>Descripcion</th>
 				<th>Precio</th>
@@ -17,6 +18,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="producto : ${productos}">
+				<td><span th:text="${producto.idProducto}" /></td>
 				<td><span th:text="${producto.nombre}" /></td>
 				<td><span th:text="${producto.descripcion}" /></td>
 				<td><span th:text="${producto.precio}" /></td>
@@ -26,9 +28,13 @@
 			</tr>
 		</tbody>
 	</table>
-
+    <br/>
 	<a th:href="@{/productos/new}">agregar</a>
 
+    <br/>
+	<br/>
+	<br/>
+	<a th:href="@{/home}"> Volver al home</a>
 </body>
 
 </html>

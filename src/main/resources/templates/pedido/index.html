@@ -14,6 +14,8 @@
 				<th>Cliente</th>
 				<th>Vendedor Original</th>
 				<th>Vendedor Auxiliar</th>
+<!-- 				<th>Subtotal</th> -->
+				<th>Local</th>
 				<th>Aceptado?</th>
 			</tr>
 
@@ -23,18 +25,24 @@
 				<td><span th:text="${pedido.idPedido}" /></td>
 				<td><span th:text="${pedido.Producto.nombre}" /></td>
 				<td><span th:text="${pedido.cantidad}" /></td>
-				<td><span th:text="${pedido.Cliente.nombre}" /></td>
-				<td><span th:text="${pedido.vendedorOriginal.nombre}" /></td>
+				<td><span th:if="${pedido.Cliente}" th:text="${pedido.Cliente.nombre} +' '+ ${pedido.Cliente.apellido}" /></td>
+				<td><span th:if="${pedido.vendedorOriginal}" th:text="${pedido.vendedorOriginal.nombre} +' '+ ${pedido.vendedorOriginal.apellido}" /></td>
 				<td><span th:if="${pedido.vendedorAuxiliar}" th:text="${pedido.vendedorAuxiliar.nombre} +' '+ ${pedido.vendedorAuxiliar.apellido}" /></td>
+<!-- 			<td><span th:text="${subtotal[pedido.idPedido-1]}" /></td>      -->
+                <td><span th:text="${pedido.Local.idLocal}" /></td>  
 				<td><span th:text="${pedido.aceptado}" /></td>
 				<td><a th:href="@{/pedidos/{id}(id=${pedido.idPedido})}">Ver</a></td>
 	
 			</tr>
 		</tbody>
 	</table>
-
+ <br/>
 	<a th:href="@{/pedidos/new}">agregar</a>
 
+    <br/>
+	<br/>
+	<br/>
+	<a th:href="@{/home}"> Volver al home</a>
 </body>
 
 </html>

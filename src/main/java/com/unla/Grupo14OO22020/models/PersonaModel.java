@@ -17,7 +17,6 @@ public PersonaModel() {}
 
 
 public PersonaModel(int idPersona, int dni, String nombre, String apellido, Date fechaDeNacimiento) {
-	super();
 	this.idPersona = idPersona;
 	this.dni = dni;
 	this.nombre = nombre;
@@ -82,8 +81,4 @@ public String toString() {
 			+ ", fechaDeNacimiento=" + fechaDeNacimiento + "]";
 }
 
-
-
-
-
-}
+}//fin class
