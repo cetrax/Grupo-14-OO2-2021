@@ -2,6 +2,8 @@ package com.unla.Grupo14OO22020.models;
 
 import java.time.LocalDate;
 
+import org.springframework.lang.Nullable;
+
 public class LoteModel {
 	private int idLote;
 	private int cantidadInicial;
@@ -9,13 +11,14 @@ public class LoteModel {
 	private LocalDate fechaIngreso;
 	private ProductoModel producto;
 	private boolean estado;
+	@Nullable
 	private LocalModel local;
-	
-	
 
+	
 	public LoteModel() { }
-
-	public LoteModel(int idLote,int cantidadInicial, int cantidadActual, LocalDate fechaIngreso, ProductoModel producto, boolean estado) {
+	
+	public LoteModel(int idLote, int cantidadInicial, int cantidadActual, LocalDate fechaIngreso,
+			ProductoModel producto, boolean estado) {
 		this.idLote = idLote;
 		this.cantidadInicial = cantidadInicial;
 		this.cantidadActual = cantidadActual;
@@ -72,13 +75,15 @@ public class LoteModel {
 		this.estado = estado;
 	}
 
+
 	public LocalModel getLocal() {
 		return local;
 	}
-
 	public void setLocal(LocalModel local) {
 		this.local = local;
 	}
+
+
 
 	@Override
 	public String toString() {

@@ -24,12 +24,5 @@ public void setEmail(String email) {
 public String toString() {
 	return "ClienteModel [email=" + email + "," + super.toString() + "]";
 }
-
-
-
-
-
 	
-	
-	
-}
+}//fin class

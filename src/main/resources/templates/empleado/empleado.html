@@ -1,0 +1,243 @@
+<!-- 
+* Copyright 2016 Carlos Eduardo Alfaro Orellana
+-->
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Empleados</title>
+	<link rel="stylesheet" href="/css/normalize.css">
+	<link rel="stylesheet" href="/css/sweetalert2.css">
+	<link rel="stylesheet" href="/css/material.min.css">
+	<link rel="stylesheet" href="/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+	<link rel="stylesheet" href="/css/main.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/js/jquery-1.11.2.min.js"><\/script>')</script>
+	<script src="/js/material.min.js" ></script>
+	<script src="/js/sweetalert2.min.js" ></script>
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js" ></script>
+	<script src="/js/main.js" ></script>
+	
+			<!-- Los iconos tipo Solid de Fontawesome-->
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	
+</head>
+<body>
+	<!-- navLateral -->
+	<section class="full-width navLateral">
+		<div class="full-width navLateral-bg btn-menu"></div>
+		<div class="full-width navLateral-body">
+			<div class="full-width navLateral-body-logo text-center tittles">
+				<i class="zmdi zmdi-close btn-menu"></i> Inventario 
+			</div>
+			<nav class="full-width">
+				<ul class="full-width list-unstyle menu-principal">
+					<li class="full-width">
+						<a th:href="@{/home}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-view-dashboard"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								HOME
+							</div>
+						</a>
+					</li>
+
+
+					
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/productos}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								PRODUCTO
+							</div>
+						</a>
+					</li>
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/pedidos}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								PEDIDOS
+							</div>
+						</a>
+					</li>
+
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/lotes}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								LOTES
+							</div>
+						</a>
+					</li>
+
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/clientes}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								CLIENTES
+							</div>
+						</a>
+					</li>
+
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/empleados}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								EMPLEADOS
+							</div>
+						</a>
+					</li>
+
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/locales}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								LOCALES
+							</div>
+						</a>
+					</li>
+	
+				</ul>
+			</nav>
+		</div>
+	</section>
+	<!-- pageContent -->
+	<section class="full-width pageContent">
+		<section class="full-width header-well">
+			<div class="full-width header-well-icon">
+				<i class="zmdi zmdi-accounts"></i>
+			</div>
+			<div class="full-width header-well-text">
+				<p class="text-condensedLight">
+					DEMOCRATIZACIÓN DE STOCK
+				</p>
+			</div>
+		</section>
+		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+			<div class="mdl-tabs__tab-bar">
+				<a href="#tabNewEmpleado" class="mdl-tabs__tab is-active">NEW</a>
+				<a href="#tabListEmpleado" class="mdl-tabs__tab">LIST</a>
+			</div>
+			<div class="mdl-tabs__panel is-active" id="tabNewEmpleado">
+				<div class="mdl-grid">
+					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+						<div class="full-width panel mdl-shadow--2dp">
+							<div class="full-width panel-tittle bg-primary text-center tittles">
+								Empleado Nuevo
+							</div>
+							<div class="full-width panel-content">
+								<form action="#" th:action="@{/empleados/create}" th:object="${empleado}" method="post">
+									<h5 class="text-condensedLight">Datos del Empleado</h5>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" th:field="*{dni}">
+										<label class="mdl-textfield__label" for="DNIEmpleado">DNI</label>
+										<span class="mdl-textfield__error">Numero Invalido</span>
+									</div>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" th:field="*{nombre}">
+										<label class="mdl-textfield__label" for="nombreEmpleado">Nombre</label>
+										<span class="mdl-textfield__error">Nombre Invalido</span>
+									</div>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" th:field="*{apellido}">
+										<label class="mdl-textfield__label" for="apellidoEmpleado">Apellido</label>
+										<span class="mdl-textfield__error">Apellido Invalido</span> 
+									</div>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="date" th:field="*{fechaDeNacimiento}">
+										<label class="mdl-textfield__label" for="fechaDeNacimientoEmpleado">Fecha de Nacimiento</label>
+										<span class="mdl-textfield__error">Direccion Invalida</span>
+									</div>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="text" th:field="*{franjaHoraria}">
+										<label class="mdl-textfield__label" for="franjaHorariaEmpleado">Franja Horaria</label>
+										<span class="mdl-textfield__error">Franja Horaria Invalido</span>
+									</div>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="checkbox" th:field="*{esGerente}">
+										<label class="mdl-textfield__label" for="esGerenteEmpleado">Es Gerente?</label>
+										<span class="mdl-textfield__error">Validacion Invalido</span>
+									</div>
+									<p class="text-center">
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addEmpleado">
+											<i class="zmdi zmdi-plus"></i>
+										</button>
+										<div class="mdl-tooltip" for="btn-addEmpleado">Añadir Cliente</div>
+									</p>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mdl-tabs__panel" id="tabListEmpleado">
+				<div class="mdl-grid">
+					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+						<div class="full-width panel mdl-shadow--2dp">
+							<div class="full-width panel-tittle bg-success text-center tittles">
+								Lista de Empleados
+							</div>
+							<div class="full-width panel-content">
+								<form action="#">
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+										<label class="mdl-button mdl-js-button mdl-button--icon" for="searchEmpleado">
+											<i class="zmdi zmdi-search"></i>
+										</label>
+										<div class="mdl-textfield__expandable-holder">
+											<input class="mdl-textfield__input" type="text" id="searchEmpleado">
+											<label class="mdl-textfield__label"></label>
+										</div>
+									</div>
+								</form>
+								<div class="mdl-list">
+									<div class="mdl-list__item mdl-list__item--two-line">
+										<span class="mdl-list__item-primary-content">
+											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
+											<span>1. Nombre Empleado</span>
+											<span class="mdl-list__item-sub-title">DNI</span>
+										</span>
+										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
+									</div>
+									<li class="full-width divider-menu-h"></li>
+									<div class="mdl-list__item mdl-list__item--two-line">
+										<span class="mdl-list__item-primary-content">
+											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
+											<span>2. Nombre Empleado</span>
+											<span class="mdl-list__item-sub-title">DNI</span>
+										</span>
+										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

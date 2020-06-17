@@ -1,4 +1,23 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Log In Democratizacion Stock</title>
+
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/error.css}">
+
+
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -8,14 +27,15 @@
 <h4 th:text="${error}"></h4> <!-- cuando ocurre un error 500 (es decir, común) en la página 
 el nevegador busca un archivo que se llame error.html y acá con th:text="${error}" obtengo 
 el mensaje y atriago a esta vista  -->
-<h2>Ha ingresado un dato que no existe</h2>
-<br/>
-<p>intente nuevamente</p>
-<br/>
-	<a th:href="@{/locales/new}">agregar</a>
-	<br/>
-	<a th:href="@{/locales/calculodist}">Calcular distancia</a>
-	<br/>
-	<a th:href="@{/locales/comenzarCalculoDistancia}">Calcular distancia por lista</a>
+<div class="wrapper">
+<div class="box">
+<h1>500</h1>
+<p>Ha ingresado un dato que no existe</p>
+<p>&#58;&#40;</p>
+<p><a href="javascript:history.back()">Dejame intentarlo nuevamente!</a></p>
+<a th:href="@{/home}"><i class="fas fa-home fa-4x"></i> 
+</div>
+</div>
 </body>
 </html>
+
