@@ -15,6 +15,8 @@ import com.unla.Grupo14OO22020.entities.Empleado;
 import com.unla.Grupo14OO22020.helpers.ViewRouteHelpers;
 import com.unla.Grupo14OO22020.models.EmpleadoModel;
 import com.unla.Grupo14OO22020.services.IEmpleadoService;
+import com.unla.Grupo14OO22020.services.ILocalService;
+
 
 @Controller
 @RequestMapping("/empleados")
@@ -24,12 +26,15 @@ public class EmpleadoController {
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
 	
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
+	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.EMPLEADO_INDEX);
 		mAV.addObject("empleados", empleadoService.getAll());
 		mAV.addObject("empleado", new EmpleadoModel());
-		
 		return mAV;
 	}
 	
@@ -37,7 +42,7 @@ public class EmpleadoController {
 	public ModelAndView crear() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.EMPLEADO_ADD);
 		mAV.addObject("empleado", new Empleado());
-		
+		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
 	
@@ -57,6 +62,7 @@ public class EmpleadoController {
 	public ModelAndView get(@PathVariable("id") int idPersona) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.EMPLEADO_UPDATE);
 		mAV.addObject("empleado", empleadoService.findByIdPersona(idPersona));
+		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
 	
@@ -66,6 +72,4 @@ public class EmpleadoController {
 		return new RedirectView(ViewRouteHelpers.EMPLEADO_ROOT);
 	}
 	
-	
-
 }

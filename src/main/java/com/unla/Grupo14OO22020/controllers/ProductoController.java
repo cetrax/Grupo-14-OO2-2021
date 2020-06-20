@@ -24,6 +24,59 @@ public class ProductoController {
 	@Qualifier("productoService")
 	private IProductoService productoService;
 	
+	
+	
+	//-----------------------------------------------------------------------------------------------//
+	//---------------------------------VISTA PARA USER: EMPLEADO-------------------------------------//
+	//-----------------------------------------------------------------------------------------------//
+	
+	@GetMapping("/indexEmpleado")
+	public ModelAndView indexEmpleado() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.PRODUCTO_INDEXEMPLEADO);
+		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("producto", new ProductoModel());
+		
+		return mAV;
+	}
+	
+	@GetMapping("/newEmpleado")
+	public ModelAndView crearEmpleado() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.PRODUCTO_ADDEMPLEADO);
+		mAV.addObject("producto", new Producto());
+		
+		return mAV;
+	}
+	
+	@PostMapping("/createEmpleado")
+	public RedirectView agregarEmpleado(@ModelAttribute(name="productos") ProductoModel producto ) {
+		productoService.insertOrUpdate(producto);
+		return new RedirectView(ViewRouteHelpers.PRODUCTO_ROOTEMPLEADO);
+	}
+	
+	@PostMapping("/deleteEmpleado/{id}")
+	public RedirectView eliminarEmpleado(@PathVariable("id") int id) {
+		productoService.remove(id);
+		return new RedirectView(ViewRouteHelpers.PRODUCTO_ROOTEMPLEADO);
+	}
+	
+	@GetMapping("/updateEmpleado/{id}")
+	public ModelAndView getEmpleado(@PathVariable("id") int idProducto) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.PRODUCTO_UPDATEEMPLEADO);
+		mAV.addObject("producto", productoService.findByIdProducto(idProducto));
+		return mAV;
+	}
+	
+	@PostMapping("/updateEmpleado")
+	public RedirectView updateEmpleado(@ModelAttribute("producto") ProductoModel productoModel) {
+		productoService.insertOrUpdate(productoModel);
+		return new RedirectView(ViewRouteHelpers.PRODUCTO_ROOTEMPLEADO);
+	}
+	
+	//-----------------------------------------------------------------------------------------------//
+	//-----------------------------------------------------------------------------------------------//
+	//-----------------------------------------------------------------------------------------------//
+	
+	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.PRODUCTO_INDEX);
@@ -32,6 +85,7 @@ public class ProductoController {
 		
 		return mAV;
 	}
+	
 	
 	@GetMapping("/new")
 	public ModelAndView crear() {

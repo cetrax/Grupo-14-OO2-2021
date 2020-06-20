@@ -1,5 +1,12 @@
 package com.unla.Grupo14OO22020.models;
 
+ import java.util.Set;
+
+import org.springframework.lang.Nullable;
+import com.unla.Grupo14OO22020.entities.Lote;
+import com.unla.Grupo14OO22020.entities.Pedido;
+import com.unla.Grupo14OO22020.entities.Empleado;
+
 public class LocalModel{
 
 	private int idLocal;
@@ -7,12 +14,18 @@ public class LocalModel{
 	private double latitud;
 	private double longitud;
 	private long telefono;
-
-	public LocalModel(){
-
-	}
+	@Nullable
+    private Set<Lote> lotes;
+	@Nullable
+    private Set<Empleado> empleados;  
+	@Nullable
+    private Set<Pedido> pedidos;  
+	
+	
+	public LocalModel(){ }
 
 	public LocalModel(int idLocal, String direccion, double latitud, double longitud, long telefono) {
+		super();
 		this.idLocal = idLocal;
 		this.direccion = direccion;
 		this.latitud = latitud;
@@ -60,11 +73,38 @@ public class LocalModel{
 		this.telefono = telefono;
 	}
 
+
+	public Set<Lote> getLotes() {
+		return lotes;
+	}
+
+	public void setLotes(Set<Lote> lotes) {
+		this.lotes = lotes;
+	}
+
+	public Set<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(Set<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+
+
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 	@Override
 	public String toString() {
 		return "LocalModel [idLocal=" + idLocal + ", direccion=" + direccion + ", latitud=" + latitud + ", longitud="
 				+ longitud + ", telefono=" + telefono + "]";
 	}
+
 
 // IMPLEMENTADO EN EL CONTROLLER POR CONSEJO DEL PROFE
 //	public double calcularDistancia(LocalModel local) {

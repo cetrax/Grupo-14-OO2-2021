@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<title>PEDIR ID</title>
+	</head>
+  <body>
+		<p> simulo el login (al elegir el empleado y pulsar enviar el id va a..... :</p>
+		
+		
+		<table id="userList" class="table table-bordered table-hover table-striped">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Id Persona</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Apellido</th>
+					<th scope="col">Dni</th>
+					<th scope="col">Fecha de Nacimiento</th>
+					<th scope="col">Franja Horaria</th>
+					<th scope="col">Es Gerente</th>
+					<th></th>
+				</tr>
+				</thead>
+					<tbody>
+
+						<tr th:each="empleado : ${empleados}">
+						<!--  coloco el id Producto como identificador de cada item en la tabla -->
+							<th scope="row"><span th:text="${empleado.idPersona}" /></th>
+							<td><span th:text="${empleado.nombre}" /></td>
+							<td><span th:text="${empleado.apellido}" /></td>
+							<td><span th:text="${empleado.dni}" /></td>
+							<td><span th:text="${#dates.format(empleado.fechaDeNacimiento)}" /></td>
+							<td><span th:text="${empleado.franjaHoraria}" /></td>
+							<td><span th:text="${empleado.esGerente}" /></td>
+
+
+							<td>
+								<div class="mdl-list__item mdl-list__item--two-line">
+								<form action="devolverIdEmpleado" method="post"> <button type="submit" class="btn btn-outline-primary waves-effect btn-sm"><span th:text="${empleado.idPersona}"/></button></form>  
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+		
+		
+	<form action="devolverIdEmpleado" method="Post">
+			<p>
+			Ingrese el ID de empleado <input name="idEmpleado" type="number" /> <br />
+			</p>
+			
+			
+			
+			<input type="submit" />
+	</form>
+	<br/>
+	<br/>
+	<a th:href="@{/homeEmpleado}"> Volver al home de Empleado</a>
+  </body>
+</html>
+
+
+
+
+
