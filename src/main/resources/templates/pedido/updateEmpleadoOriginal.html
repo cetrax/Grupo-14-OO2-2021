@@ -5,23 +5,21 @@
 <title>Ver/modificar datos</title>
 </head>
 <body>
-	<form action="#" th:action="@{/pedidos/update}" th:object="${pedido}"
+	
+	<form action="#" th:action="@{/pedidos/updateEmplOri}" th:object="${pedido}"
 		method="post">
 		<input type="hidden" th:field="*{idPedido}" />
-
+       <h4>Realice el/los cambio/s que crea necesario/s :</h4>
 		<p>
-			Producto: <select placeholder="Producto"
+			Cambiar producto del pedido: <select placeholder="Producto"
 				th:field="*{producto.idProducto}">
 				<option th:each="p: ${productos}" th:value="${p.idProducto}"
 					th:text="${p.nombre}"></option>
 			</select>
 		</p>
-		<p>
-			Cantidad: <input type="number" th:field="*{cantidad}" />
-		</p>
 
 		<p>
-			Cliente: <select placeholder="Cliente"
+			Cambiar el cliente: <select placeholder="Cliente"
 				th:field="*{cliente.idPersona}">
 				<option th:each="c: ${clientes}" th:value="${c.idPersona}"
 					th:text="${c.nombre} +' '+ ${c.apellido}"></option>
@@ -29,28 +27,21 @@
 		</p>
 
 		<p>
-			Vendedor Original: <select placeholder="Empleado"
+			Cambiar el vendedor original: <select placeholder="Empleado"
 				th:field="*{vendedorOriginal.idPersona}">
 				<option th:each="e: ${empleados}" th:value="${e.idPersona}"
-					th:text="${e.nombre} +' '+ ${e.apellido}"></option>
+					th:text="${e.nombre} +' '+ ${e.apellido}+'   Local '+${e.local.idLocal}"></option>
 			</select>
 		</p>
 
-		<p>
-			Vendedor Auxiliar: <select placeholder="Empleado"
-				th:field="*{vendedorAuxiliar.idPersona}">
-				<option th:each="e: ${empleados}" th:value="${e.idPersona}"
-					th:text="${e.nombre} +' '+ ${e.apellido}"></option>
-			</select>
-		</p>
-		<p> Elija el Local:  
+		<p>Ingresar una cantidad menor : <input type="number" th:field="*{cantidad}" /> </p> 
+
+		<p> Eligir el Local al que solicitara Pedido/Stock:  
 		    <select placeholder="Local" th:field="*{local.idLocal}">
-				<option th:each="l: ${locales}" th:value="${l.idLocal}" th:text="${l.idLocal}"></option>
+				<option th:each="l: ${locales}" th:value="${l.idLocal}" th:text="'Local  '+${l.idLocal}"></option>
 		  	</select> 
 		</p>			  
-		<p>
-			Aceptado?: <input type="checkbox" th:field="*{aceptado}" />
-		</p>
+
 		<br /> <input type="submit" value="Edit" />
 	</form>
     <br /> 
@@ -59,7 +50,6 @@
 		method="post">
 		<input type="submit" value="Delete Pedido" />
 	</form>
-	
 	
 <br/>
 <br/>

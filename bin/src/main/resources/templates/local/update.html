@@ -14,3 +14,38 @@
 	method="post">
 	<input type="submit" value="Delete Local" />
 </form>
+<br/>
+<p>PARTE NO EDITABLE</p>
+     <table>
+  <tr>
+    <th>|--|Stoks total |--|  </th>
+    <th>Detalle del stock (lotes de productos)</th>
+  </tr>
+  <tr>
+    <td><span th:text="'|-----|'+${stock}+'|------|'" /></td>
+    <td><select><option th:each="ls: ${lotes}" th:value="${ls.idLote}" th:text="${ls.producto.nombre}+'  '+${ls.cantidadActual}+' unidades '"></select></td>
+  </tr>
+</table>
+
+
+<br/>
+<br/>
+<br/>
+
+<table>
+	<thead>
+		<tr>
+			<th>idLocal</th>
+			<th>Nombre/Direccion</th>
+			<th>Distancia desde el que se consulta</th>
+		</tr>
+
+	</thead>
+	<tbody>
+		<tr th:each="local : ${localesCer}">
+    		<td><span th:text="${local.idLocal}"/></td>
+			<td><span th:text="${local.direccion}"/></td>
+			<td><span th:text="${local.latitud}"/></td>
+		</tr>
+	</tbody>
+</table>

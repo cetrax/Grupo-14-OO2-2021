@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>EMPLEADO</title>
-</head>
-<body>
 
+<html>
+	<head>
+	<title>PEDIR ID</title>
+	</head>
+  <body>
+		<p> simulo el login (al elegir el empleado y pulsar enviar el id va a devolverIdEmpleado:</p>
+	<form action="devolverIdEmpleado" method="Post">
+			<p>
+			Ingrese el ID de empleado <input name="idEmpleado" type="number" /> <br />
+			</p>
+			
+			<input type="submit" />
+	</form>
+	
+	<h4>Ingrese el Id de acuerdo a esta lista de empleados </h4>
+	<br/>
+	<br/>	
 	<table>
 		<thead>
 			<tr>
@@ -17,7 +29,6 @@
 				<th>Local al que pertenece</th>
 				<th>Es gerente</th>
 			</tr>
-
 		</thead>
 		<tbody>
 			<tr th:each="empleado : ${empleados}">
@@ -28,19 +39,17 @@
 				<td><span th:text="${empleado.dni}" /></td>
 				<td><span th:text="${empleado.franjaHoraria}" /></td>
 				<td><span th:text="${empleado.Local.direccion}" /></td>
-				<td><span th:text="${empleado.esGerente}" /></td>
-				<td><a th:href="@{/empleados/{id}(id=${empleado.idPersona})}">Ver</a></td>
-	
+				<td><span th:text="${empleado.esGerente}" /></td>	
 			</tr>
 		</tbody>
 	</table>
-    <br/>
-	<a th:href="@{/empleados/new}">agregar</a>
-    <br/>
 	<br/>
 	<br/>
-	<a th:href="@{/home}"> Volver al home</a>
-</body>
-
+	<a th:href="@{/homeEmpleado}"> Volver al home de Empleado</a>
+  </body>
 </html>
+
+
+
+
 
