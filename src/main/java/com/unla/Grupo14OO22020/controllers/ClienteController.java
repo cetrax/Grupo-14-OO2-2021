@@ -24,6 +24,58 @@ public class ClienteController {
 	@Qualifier("clienteService")
 	private IClienteService clienteService;
 	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	@GetMapping("/indexEmpleado")
+	public ModelAndView indexEmpleado() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.CLIENT_INDEXEMPLEADO);
+		mAV.addObject("clientes", clienteService.getAll());
+		mAV.addObject("cliente", new ClienteModel());
+		
+		return mAV;
+	}
+	
+	@GetMapping("/newEmpleado")
+	public ModelAndView crearEmpleado() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.CLIENT_ADDEMPLEADO);
+		mAV.addObject("cliente", new Cliente());
+		
+		return mAV;
+	}
+	
+	@PostMapping("/createEmpleado")
+	public RedirectView agregarEmpleado(@ModelAttribute(name="clientes") ClienteModel cliente) {
+		clienteService.insertOrUpdate(cliente);
+		return new RedirectView(ViewRouteHelpers.CLIENT_ROOTEMPLEADO);
+	}
+	
+	@PostMapping("/deleteEmpleado/{id}")
+	public RedirectView eliminarEmpleado(@PathVariable("id") int id) {
+		clienteService.remove(id);
+		return new RedirectView(ViewRouteHelpers.CLIENT_ROOTEMPLEADO);
+	}
+	
+	@GetMapping("/updateEmpleado/{id}")
+	public ModelAndView getEmpleado(@PathVariable("id") int idPersona) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.CLIENT_UPDATEEMPLEADO);
+		mAV.addObject("cliente", clienteService.findByIdPersona(idPersona));
+		return mAV;
+	}
+	
+	@PostMapping("/updateEmpleado")
+	public RedirectView updateEmpleado(@ModelAttribute("cliente") ClienteModel clienteModel) {
+		clienteService.insertOrUpdate(clienteModel);
+		return new RedirectView(ViewRouteHelpers.CLIENT_ROOTEMPLEADO);
+	}
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.CLIENT_INDEX);

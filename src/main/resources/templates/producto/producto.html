@@ -1,0 +1,222 @@
+<!-- 
+* Copyright 2016 Carlos Eduardo Alfaro Orellana
+-->
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Productos</title>
+	<link rel="stylesheet" href="/css/normalize.css">
+	<link rel="stylesheet" href="/css/sweetalert2.css">
+	<link rel="stylesheet" href="/css/material.min.css">
+	<link rel="stylesheet" href="/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+	<link rel="stylesheet" href="/css/main.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/js/jquery-1.11.2.min.js"><\/script>')</script>
+	<script src="/js/material.min.js" ></script>
+	<script src="/js/sweetalert2.min.js" ></script>
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js" ></script>
+	<script src="/js/main.js" ></script>
+	
+	
+	<!-- Los iconos tipo Solid de Fontawesome-->
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+	<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+</head>
+<body>
+	<!-- navLateral -->
+	<section class="full-width navLateral">
+		<div class="full-width navLateral-bg btn-menu"></div>
+		<div class="full-width navLateral-body">
+			<div class="full-width navLateral-body-logo text-center tittles">
+				<i class="zmdi zmdi-close btn-menu"></i> Inventario 
+			</div>
+			<nav class="full-width">
+				<ul class="full-width list-unstyle menu-principal">
+					<li class="full-width">
+						<a th:href="@{/home}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-view-dashboard"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								HOME
+							</div>
+						</a>
+					</li>
+
+
+					
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/productos}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								PRODUCTO
+							</div>
+						</a>
+					</li>
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/pedidos}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								PEDIDOS
+							</div>
+						</a>
+					</li>
+
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/lotes}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								LOTES
+							</div>
+						</a>
+					</li>
+
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/clientes}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								CLIENTES
+							</div>
+						</a>
+					</li>
+
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/empleados}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								EMPLEADOS
+							</div>
+						</a>
+					</li>
+
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a th:href="@{/locales}" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-washing-machine"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								LOCALES
+							</div>
+						</a>
+					</li>
+	
+				</ul>
+			</nav>
+		</div>
+	</section>
+	<!-- pageContent -->
+	<section class="full-width pageContent">
+		<section class="full-width header-well">
+			<div class="full-width header-well-icon">
+				<i class="zmdi zmdi-accounts"></i>
+			</div>
+			<div class="full-width header-well-text">
+				<p class="text-condensedLight">
+					DEMOCRATIZACIÓN DE STOCK
+				</p>
+			</div>
+		</section>
+		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+			<div class="mdl-tabs__tab-bar">
+				<a href="#tabNewProducto" class="mdl-tabs__tab is-active">NEW</a>
+				<a href="#tabListProducto" class="mdl-tabs__tab">LIST</a>
+			</div>
+			<div class="mdl-tabs__panel is-active" id="tabNewProducto">
+				<div class="mdl-grid">
+					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+						<div class="full-width panel mdl-shadow--2dp">
+							<div class="full-width panel-tittle bg-primary text-center tittles">
+								Producto Nuevo
+							</div>
+							<div class="full-width panel-content">
+								<form action="#" th:action="@{/productos/create}" th:object="${producto}" method="post">
+									<h5 class="text-condensedLight">Datos del Producto</h5>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" th:field="*{nombre}">
+										<label class="mdl-textfield__label" for="nombreProducto">Nombre</label>
+										<span class="mdl-textfield__error">Nombre Invalido</span>
+									</div>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" th:field="*{descripcion}">
+										<label class="mdl-textfield__label" for="descripcionProducto">Descripcion</label>
+										<span class="mdl-textfield__error">Descripcion Invalida</span> 
+									</div>
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="number" th:field="*{precio}">
+										<label class="mdl-textfield__label" for="precioProducto">Precio</label>
+										<span class="mdl-textfield__error">Precio Invalida</span>
+									</div>
+									<p class="text-center">
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addProducto">
+											<i class="zmdi zmdi-plus"></i>
+										</button>
+										<div class="mdl-tooltip" for="btn-addProducto">Añadir Producto</div>
+									</p>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mdl-tabs__panel" id="tabListProducto">
+				<div class="mdl-grid">
+					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+						<div class="full-width panel mdl-shadow--2dp">
+							<div class="full-width panel-tittle bg-success text-center tittles">
+								Lista de Productos
+							</div>
+							<div class="full-width panel-content">
+								<form action="#">
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+										<label class="mdl-button mdl-js-button mdl-button--icon" for="searchProducto">
+											<i class="zmdi zmdi-search"></i>
+										</label>
+										<div class="mdl-textfield__expandable-holder">
+											<input class="mdl-textfield__input" type="text" id="searchProducto">
+											<label class="mdl-textfield__label"></label>
+										</div>
+									</div>
+								</form>
+								
+								<div class="mdl-list">
+									<tr th:each="producto : ${productos}">
+									<div class="mdl-list__item mdl-list__item--two-line">
+										<span class="mdl-list__item-primary-content">
+											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
+											<td>Nombre Producto: <span th:text="${producto.nombre}"></span> </td>
+											<td><span class="mdl-list__item-sub-title" th:text="${producto.precio}"></span></td>
+										</span>
+										<a th:href="@{/productos/{id}(id=${producto.idProducto})}"> <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary"><i class="far fa-edit"></i></button></a>   <form action="#" th:action="@{/productos/delete/{id}(id=${producto.idProducto})}" method="post"> <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary"><i class="fas fa-trash-alt"></i></button></form>
+									</div>
+									</tr>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

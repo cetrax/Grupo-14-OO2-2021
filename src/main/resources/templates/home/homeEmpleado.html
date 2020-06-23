@@ -1,0 +1,129 @@
+-<!-- 
+* Copyright 2016 Carlos Eduardo Alfaro Orellana
+-->
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+	<!--JQUERY-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+
+<!-- Los iconos tipo Solid de Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<!-- DATA TABLE -->
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">	
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<!--  ordenamiento de la lista -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        //Asegurate que el id que le diste a la tabla sea igual al texto despues del simbolo #
+        $('#userList').DataTable();
+    } );
+</script>
+
+	<link rel="stylesheet" type="text/css" href="static/css/user-form.css"
+	th:href="@{/css/user-form.css}">
+
+	<meta charset="UTF-8">
+	<title>Home</title>
+	<link href="/css/normalize.css" rel="stylesheet">
+	<link href="/css/sweetalert2.css" rel="stylesheet">
+	<link href="/css/material.min.css" rel="stylesheet">
+	<link href="/css/material-design-iconic-font.min.css" rel="stylesheet">
+	<link href="/css/jquery.mCustomScrollbar.css" rel="stylesheet">
+	<link href="/css/main.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/js/jquery-1.11.2.min.js"><\/script>')</script>
+	<script src="/js/material.min.js" ></script>
+	<script src="/js/sweetalert2.min.js" ></script>
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js" ></script>
+	<script src="/js/main.js" ></script>
+</head>
+<body>
+	<!-- pageContent -->
+
+		<section class="full-width text-center" style="padding: 20px 20;">
+			
+			<div class="full-width navLateral-body-logo text-center tittles">
+			<h2>DEMOCRATIZACION DE STOCK</h2>
+				<i class="zmdi zmdi-close btn-menu"></i> 
+			</div>
+			<!-- Tiles -->
+			<h3 class="text-center tittles"> </h3>
+			<h3 class="text-center tittles"> </h3>
+			
+			<article class="full-width tile">
+				<div class="card border-warning mb-3">
+				<a th:href="@{/productos/indexEmpleado}" class="full-width">
+					<div class="tile-text">
+						<span class="text-condensedLight">
+							Lista<br>
+							<small>Productos</small>
+						</span>
+					</div>
+				</a>
+				<i class="fab fa-product-hunt tile-icon"></i>
+				</div>
+			</article>
+			
+			<article class="full-width tile">
+				<a th:href="@{/pedidos/empDelPed}" class="full-width">
+				<div class="card border-warning mb-3">
+					<div class="tile-text">
+						<span class="text-condensedLight">
+							Lista<br>
+							<small>Pedidos</small>
+						</span>
+					</div>
+				</div>
+				</a>
+				<i class="fas fa-dolly-flatbed tile-icon"></i>
+			</article>
+			<article class="full-width tile">
+				<a th:href="@{/lotes/indexEmpleado}" class="full-width">
+				<div class="card border-warning mb-3">
+					<div class="tile-text">
+						<span class="text-condensedLight">
+							Lista<br>
+							<small>Lotes</small>
+						</span>
+					</div>
+				</div>
+				</a>
+				<i class="fas fa-shopping-bag tile-icon"></i>
+			</article>
+			<article class="full-width tile">
+				<a th:href="@{/clientes/indexEmpleado}" class="full-width">
+				<div class="card border-warning mb-3">
+					<div class="tile-text">
+						<span class="text-condensedLight">
+							Lista<br>
+							<small>Clientes</small>
+						</span>
+					</div>
+				</div>
+				</a>
+				<i class="fas fa-user-circle tile-icon"></i>
+			</article>
+		</section>
+</body>
+</html>

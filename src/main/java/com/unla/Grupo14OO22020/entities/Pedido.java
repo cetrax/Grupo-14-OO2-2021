@@ -1,14 +1,18 @@
 package com.unla.Grupo14OO22020.entities;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.lang.Nullable;
 
 
@@ -21,6 +25,9 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPedido;
 	
+	@Column(name = "fecha")
+	@CreationTimestamp
+	private LocalDate fecha;
 	
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Producto producto;
@@ -32,37 +39,54 @@ public class Pedido {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Cliente cliente;
 	
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(fetch=FetchType.LAZY)
 	private Empleado vendedorOriginal;
 	
 	@Nullable
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(fetch=FetchType.LAZY)
 	private Empleado vendedorAuxiliar;
 	
+	@Nullable
+	@OneToOne(fetch=FetchType.LAZY)
+	private Local local;
 	
+	@Nullable
 	@Column(name = "subtotal")
 	private float subtotal;
 	
-	
+	@Nullable	
 	@Column(name = "aceptado")
 	private boolean aceptado;
+
 	
 	
-	public Pedido(int idPedido, Producto producto, int cantidad, Cliente cliente,
-			Empleado vendedorOriginal, Empleado vendedorAuxiliar, boolean aceptado) {
+	public Pedido() { }
+	
+	
+	public Pedido(int idPedido, LocalDate fecha, Producto producto, int cantidad, Cliente cliente,
+			Empleado vendedorOriginal, Empleado vendedorAuxiliar, Local local, boolean aceptado) {
 		super();
 		this.idPedido = idPedido;
+		this.fecha = fecha;
 		this.producto = producto;
 		this.cantidad = cantidad;
-		//this.local = local;
 		this.cliente = cliente;
 		this.vendedorOriginal = vendedorOriginal;
 		this.vendedorAuxiliar = vendedorAuxiliar;
-		this.aceptado = aceptado;
+		this.local = local;
 		this.subtotal = CalcularSubtotal();
+		this.aceptado = aceptado;
 	}
 
-	public Pedido() { }
+
+	
+	public LocalDate getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
 
 	public Producto getProducto() {
 		return producto;
@@ -87,15 +111,7 @@ public class Pedido {
 	public void setAceptado(boolean aceptado) {
 		this.aceptado = aceptado;
 	}
-	/*
-	public Local getLocal() {
-		return local;
-	}
-
-	public void setLocal(Local local) {
-		this.local = local;
-	}
-	*/
+	
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -135,10 +151,16 @@ public class Pedido {
 	public void setTotal(float subtotal) {
 		this.subtotal = subtotal;
 	}
-	/*
-	 
-	 
-	@Override
+	
+    public Local getLocal() {
+		return local;
+	}
+
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+
+	/*  @Override
 	public String toString() {
 		return "Pedido [producto=" + producto + ", cantidad=" + cantidad + ", local=" + local + ", cliente=" + cliente
 				+ ", vendedorOriginal=" + vendedorOriginal + ", vendedorAuxiliar=" + vendedorAuxiliar + "]\n\n";

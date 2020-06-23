@@ -1,7 +1,5 @@
 package com.unla.Grupo14OO22020.converters;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +15,7 @@ public class LoteConverter {
 	@Autowired
 	@Qualifier("productoConverter")
 	private ProductoConverter productoConverter;
+
 	
 	public LoteModel entityToModel (Lote lote) {
 		return new LoteModel(lote.getIdLote(), lote.getCantidadInicial(),lote.getCantidadActual(),lote.getFechaIngreso(), productoConverter.entityToModel(lote.getProducto()), lote.isEstado());

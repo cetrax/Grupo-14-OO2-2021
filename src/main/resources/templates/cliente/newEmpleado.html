@@ -1,0 +1,183 @@
+<!--  <!DOCTYPE html>
+
+<html>
+	<head>
+	<title>Carga de datos</title>
+	</head>
+  <body>
+	<form action="#" th:action="@{/clientes/create}" th:object="${cliente}" method="post">
+		<p> Nombre: <input type="text" th:field="*{nombre}" /> </p>
+		<p> Apellido: <input type="text" th:field="*{apellido}" /> </p>
+		<p>	Dni: <input type="number" th:field="*{dni}" /> </p>
+		<p>	FechaDeNacimiento: <input type="date" th:field="*{fechaDeNacimiento}" /> </p>
+		<p>	Email: <input type="text" th:field="*{email}" /> </p>
+		
+		<input type="submit" value="Agregar"/>
+	</form>
+  </body>
+</html>
+
+
+<form action="../../form-result.php" method="post" target="_blank">
+
+  <p>Fecha esperada: <input type="date" name="fechaesperada"> <input type="submit" value="Enviar datos"></p>
+
+</form>
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+
+<!--   ---------------------------------------------------------------------------------------------     -->
+
+
+
+  <!--   ---------------------------------------------------------------------------------------------     -->
+
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="static/css/user-form.css" th:href="@{/css/user-form.css}">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    CLIENTES
+  </title>
+  
+  
+  
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- CSS Files -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="/demo/demo.css" rel="stylesheet" />
+</head>
+
+<body class="">
+ <div class="wrapper ">
+    <div class="sidebar" data-color="yellow">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+      <div class="logo">
+        <a href="http://www.unla.edu.ar/carreras/grado/licenciaturas/sistemas" class="simple-text logo-mini">
+         <i class="now-ui-icons education_hat"></i>
+        </a>
+        <a href="http://www.unla.edu.ar/carreras/grado/licenciaturas/sistemas" class="simple-text logo-normal">
+          UNLa SISTEMAS
+        </a>
+      </div>
+      <div class="sidebar-wrapper" id="sidebar-wrapper">
+        <ul class="nav">
+          <li>
+            <a href="/homeEmpleado">
+              <i class="now-ui-icons business_globe"></i>
+              <p>HOME</p>
+            </a>
+          </li>
+          <li>
+            <a href="/productos/indexEmpleado" class="full-width">
+              <i class="now-ui-icons shopping_tag-content"></i>
+              <p>Productos</p>
+            </a>
+          </li>
+          <li>
+            <a href="/pedidos/empDelPed">
+              <i class="now-ui-icons shopping_cart-simple"></i>
+              <p>Pedidos</p>
+            </a>
+          </li>
+          <li>
+            <a href="/lotes/indexEmpleado">
+              <i class="now-ui-icons shopping_box"></i>
+              <p>Lotes</p>
+            </a>
+          </li>
+          <li class="active ">
+            <a href="/clientes/indexEmpleado">
+              <i class="now-ui-icons users_single-02"></i>
+              <p>Clientes</p>
+            </a>
+          </li>
+          <li class="active-pro">
+            <a href="/error">
+              <i class="now-ui-icons ui-2_settings-90"></i>
+              <p>Reportar Error</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+	<div class="container">
+		<div class="mx-auto col-md-16 main-section" id="myTab" role="tablist">
+
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="list" role="tabpanel"
+					aria-labelledby="list-tab">
+
+
+					<div class="card text-white bg-primary mb-3">
+							<div class="card-header">
+							<h5 class="card-title">CLIENTE NUEVO</h5>
+							</div>
+							<div class="card-body">
+						
+						
+
+
+							<div class="table-responsive">
+							
+															<table id="userList"
+									class="table table-bordered table-hover table-striped">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">Nombre</th>
+											<th scope="col">Apellido</th>
+											<th scope="col">Dni</th>
+											<th scope="col">Fecha de Nacimiento</th>
+											<th scope="col">Email</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<form action="#" th:action="@{/clientes/createEmpleado}" th:object="${cliente}" method="post">
+											<!--  coloco el id Producto como identificador de cada item en la tabla -->
+											<td><input class="form-control" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" th:field="*{nombre}"></td>
+											<td><input class="form-control" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" th:field="*{apellido}"></td>
+											<td><input class="form-control" type="number" pattern="-?[0-9]*(\.[0-9]+)?" th:field="*{dni}"></td>
+											<td><input class="form-control" type="date" th:field="*{fechaDeNacimiento}"></td>
+											<td><input class="form-control" type="email" th:field="*{email}"></td>
+
+
+
+												<td><button class="btn btn-outline-primary waves-effect btn-sm">   
+												<i class="now-ui-icons ui-1_simple-add"></i>
+												</button></td>
+										</form>
+										
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				<div class="tab-pane fade" id="form" role="tabpanel"
+					aria-labelledby="form-tab"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
