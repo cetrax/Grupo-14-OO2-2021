@@ -12,9 +12,17 @@
 			<p>	DNI: <input type="number" th:field="*{dni}" /> </p>
 			<p>	Franja Horaria: <input type="text" th:field="*{franjaHoraria}" /> </p>
 			<p>	Tildar si el empleado es gerente: <input type="checkbox" th:field="*{esGerente}" /> </p>
-			
+			<p> elegir Local: </p>
+			<select placeholder="Local" th:field="*{local.idLocal}">
+			<option th:each="l: ${locales}" th:value="${l.idLocal}" th:text="${l.direccion}"></option>
+			</select>
+			<br/>			
 			<input type="submit" value="Agregar" />
 		</form>
+    <br/>
+	<br/>
+	<br/>
+	<a th:href="@{/home}"> Volver al home</a>
   </body>
 </html>
 

@@ -1,8 +1,11 @@
 package com.unla.Grupo14OO22020.helpers;
 
 public class ViewRouteHelpers {
+	public final static String HOME = "home/home";
+	public final static String ROUTE = "/home";
 	public final static String INDEX = "home/index";
-
+	public final static String HOME_EMPLEADO = "home/homeEmpleado";
+	public final static String ROUTE_EMPLEADO = "/homeEmpleado";
 	//redirects	
 	public final static String ROUTE_INDEX = "/index";
 	public final static String CLIENT_ROOT = "/clientes";
@@ -10,8 +13,8 @@ public class ViewRouteHelpers {
 	public final static String PRODUCTO_ROOT="/productos";
 	public final static String LOCAL_ROOT="/locales";
 	public final static String PEDIDO_ROOT="/pedidos";
+	public static final String PEDIDO_LOCAL_EMPLEADO_ROOT = "/pedidos/pedEmpleado";
 	public final static String LOTE_ROOT="/lotes";
-	public final static String STOCK_ROOT="/stocks";
 	
 
 	//Cliente
@@ -41,16 +44,16 @@ public class ViewRouteHelpers {
 	public final static String PEDIDO_INDEX = "pedido/index";
 	public final static String PEDIDO_ADD = "pedido/new";
 	public final static String PEDIDO_UPDATE = "pedido/update";
+	public static final String PEDIDO_PEDIR_ID_EMPLEADO = "pedido/empDelPed";
+	public static final String MOSTRAR_PEDIDOS_LOCAL_EMPLEADO = "pedido/pedEmpleado";//pedidos relacionados con el empleado
+	public final static String ADD_PEDIDO_DEL_EMPLEADO = "pedido/newPedidoEmpleado";
+	public final static String PEDIDO_UPDATE_EMPL_ORIG = "pedido/updateEmpleadoOriginal";
+	public final static String PEDIDO_UPDATE_EMPL_AUXI = "pedido/updateEmpleadoAuxilar";
 	
 	//lote
 	public final static String LOTE_UPDATE = "lote/update";
 	public final static String LOTE_ADD = "lote/new";
 	public final static String LOTE_INDEX = "lote/index";
-	
-	//Stock
-	public final static String STOCK_UPDATE = "stock/update";
-	public final static String STOCK_ADD = "stock/new";
-	public final static String STOCK_INDEX = "stock/index";
-	
+		
 
 }//Fin class

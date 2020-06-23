@@ -14,23 +14,33 @@
 		
 		<p> Cliente:  
 		    <select placeholder="Cliente" th:field="*{cliente.idPersona}">
-				<option th:each="c: ${clientes}" th:value="${c.idPersona}" th:text="${c.nombre}"></option>
+				<option th:each="c: ${clientes}" th:value="${c.idPersona}" th:text="${c.nombre} +' '+ ${c.apellido}"></option>
 		  	</select> </p>
 		
 		<p> Vendedor Original: 
 		    <select placeholder="Empleado" th:field="*{vendedorOriginal.idPersona}">
-				<option th:each="e: ${empleados}" th:value="${e.idPersona}" th:text="${e.nombre}"></option>
+				<option th:each="e: ${empleados}" th:value="${e.idPersona}" th:text="${e.nombre} +' '+ ${e.apellido}"></option>
 			</select> </p>
-		
+ 		
 		<p> Vendedor Auxiliar: 
 		      <select placeholder="Empleado" th:field="*{vendedorAuxiliar.idPersona}">
-				<option th:each="e: ${empleados}" th:value="${e.idPersona}" th:text="${e.nombre}"></option>
+				<option th:each="e: ${empleados}" th:value="${e.idPersona}" th:text="${e.nombre} +' '+ ${e.apellido}"></option>
 			  </select> </p>
-		
-		<p> Aceptado?: <input type="checkbox" th:field="*{aceptado}" /> </p> 
+			  
+		<p> Elija el su Local:  
+		    <select placeholder="Local" th:field="*{local.idLocal}">
+				<option th:each="l: ${locales}" th:value="${l.idLocal}" th:text="${l.idLocal}"></option>
+		  	</select> </p>			  
+	
+ 		<p> Aceptado?: <input type="checkbox" th:field="*{aceptado}" /> </p>  
 		<br/>
 		<br/>
 		<input type="submit" value="Agregar"/>
 	</form>
+	
+    <br/>
+	<br/>
+	<br/>
+	<a th:href="@{/home}"> Volver al home</a>
   </body>
 </html>

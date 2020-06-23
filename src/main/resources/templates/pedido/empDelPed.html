@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<title>PEDIR ID</title>
+	</head>
+  <body>
+		<p> simulo el login (al elegir el empleado y pulsar enviar el id va a devolverIdEmpleado:</p>
+	<form action="devolverIdEmpleado" method="Post">
+			<p>
+			Ingrese el ID de empleado <input name="idEmpleado" type="number" /> <br />
+			</p>
+			
+			<input type="submit" />
+	</form>
+	
+	<h4>Ingrese el Id de acuerdo a esta lista de empleados </h4>
+	<br/>
+	<br/>	
+	<table>
+		<thead>
+			<tr>
+			    <th>id </th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Fecha de Nacimiento</th>
+				<th>DNI</th>
+				<th>Franja Horaria</th>
+				<th>Local al que pertenece</th>
+				<th>Es gerente</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="empleado : ${empleados}">
+				<td><span th:text="${empleado.idPersona}" /></td>
+				<td><span th:text="${empleado.nombre}" /></td>
+				<td><span th:text="${empleado.apellido}" /></td>
+				<td><span th:text="${empleado.fechaDeNacimiento}" /></td>
+				<td><span th:text="${empleado.dni}" /></td>
+				<td><span th:text="${empleado.franjaHoraria}" /></td>
+				<td><span th:text="${empleado.Local.direccion}" /></td>
+				<td><span th:text="${empleado.esGerente}" /></td>	
+			</tr>
+		</tbody>
+	</table>
+	<br/>
+	<br/>
+	<a th:href="@{/homeEmpleado}"> Volver al home de Empleado</a>
+  </body>
+</html>
+
+
+
+
+

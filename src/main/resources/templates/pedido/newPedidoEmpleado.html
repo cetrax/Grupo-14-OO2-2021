@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<title>Agregar pedido de otro local</title>
+	</head>
+  <body>
+	<form action="#" th:action="@{/pedidos/crearunPedYmostrarDelEmpl}"  th:object="${pedido}" method="post">
+		<p> Producto:  
+		    <select placeholder="Producto" th:field="*{producto.idProducto}">
+				<option th:each="p: ${productos}" th:value="${p.idProducto}" th:text="${p.nombre}"></option>
+			</select> </p>
+		 <p> Cantidad: <input type="number" th:field="*{cantidad}" /> </p> 
+		
+		<p> Cliente:  
+		    <select placeholder="Cliente" th:field="*{cliente.idPersona}">
+				<option th:each="c: ${clientes}" th:value="${c.idPersona}" th:text="${c.nombre} +' '+ ${c.apellido}"></option>
+		  	</select> </p>
+		
+		<p> Vendedor Original: 
+		    <select placeholder="Empleado" th:field="*{vendedorOriginal.idPersona}">
+				<option th:each="e: ${empleados}" th:value="${e.idPersona}" th:text="${e.nombre} +' '+ ${e.apellido}+'   Local '+${e.local.idLocal}"></option>
+			</select> </p>
+ 					  
+		<p> Elija el su Local:  
+		    <select placeholder="Local" th:field="*{local.idLocal}">
+				<option th:each="l: ${locales}" th:value="${l.idLocal}" th:text="${l.idLocal}"></option>
+		  	</select> </p>			  
+
+		<br/>
+		<br/>
+		<input type="submit" value="Agregar"/>
+	</form>
+	
+    <br/>
+	<br/>
+	<br/>
+	<a th:href="@{/homeEmpleado}"> Volver al home de Empleado</a>
+	
+	<br/>
+	<br/>
+	<a th:href="@{/pedidos/empDelPed}"> Salir del Local (para entrar con otro idEmpleado)</a>
+  </body>
+</html>
+

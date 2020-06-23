@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Ver/modificar datos</title>
+</head>
+<body>
+	
+	<form action="#" th:action="@{/pedidos/updateEmplAuxi}" th:object="${pedido}"
+		method="post">
+		<input type="hidden" th:field="*{idPedido}" />
+      
+      <p>Cantidad solicitada <input type="number" th:field="*{cantidad}" /> no cambie la cantidad </p>
+       <p>
+			Producto: <select placeholder="Producto"
+				th:field="*{producto.idProducto}">
+				<option th:each="p: ${productos}" th:value="${p.idProducto}"
+					th:text="${p.nombre}"></option>
+			</select>
+		</p>
+
+		<p>
+			Cliente: <select placeholder="Cliente"
+				th:field="*{cliente.idPersona}">
+				<option th:each="c: ${clientes}" th:value="${c.idPersona}"
+					th:text="${c.nombre} +' '+ ${c.apellido}"></option>
+			</select>
+		</p>
+
+		<p>
+			Vendedor Original: <select placeholder="Empleado"
+				th:field="*{vendedorOriginal.idPersona}">
+				<option th:each="e: ${empleado}" th:value="${e.idPersona}"
+					th:text="${e.nombre} +' '+ ${e.apellido}+'   Local '+${e.local.idLocal}"></option>
+			</select>
+		</p>
+
+		<p> Su respuesta vuelve al Local del empleado original (del Pedido/Stock) que es:   
+		    <select placeholder="Local" th:field="*{local.idLocal}">
+				<option th:each="l: ${locales}" th:value="${l.idLocal}" th:text="'Local  '+${l.idLocal}"></option>
+		  	</select> 
+		</p>	
+		
+		       <h4>Realize los 2 Pasos o cancele/elimine el pedido:</h4> 		  
+		
+		<p>1) Elija el vendedor Auxiliar (usted): <select placeholder="Empleado"
+				th:field="*{vendedorAuxiliar.idPersona}">
+				<option th:each="e: ${empleados}" th:value="${e.idPersona}"
+					th:text="${e.nombre} +' '+ ${e.apellido}"></option>
+			</select>
+		</p>
+			  
+		<p>
+	      2) Tildar solo si acepta el pedido: <input type="checkbox" th:field="*{aceptado}" />
+		</p>
+		<br /> <input type="submit" value="Edit" />
+	</form>
+    <br /> 
+	<form action="#"
+		th:action="@{/pedidos/delete/{id}(id=${pedido.idPedido})}"
+		method="post">
+		<input type="submit" value="Delete Pedido" />
+	</form>
+</body>
+</html>

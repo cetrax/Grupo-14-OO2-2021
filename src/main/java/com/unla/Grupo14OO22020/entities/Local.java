@@ -1,16 +1,22 @@
 package com.unla.Grupo14OO22020.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name="local")
-public class Localito {
+public class Local {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,14 +34,22 @@ public class Localito {
 	@Column(name = "telefono")
 	private long telefono;
 	
-	@OneToOne(mappedBy = "local")
-    private Stock stock;
 	
-	public Localito(){
-		
-	}
+	@Nullable
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="local")
+	private Set<Lote> lotes=new HashSet<Lote>();
 	
-	public Localito(int idLocal, String direccion, double latitud, double longitud, long telefono) {
+	@Nullable
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="local")
+	private Set<Empleado> empleados=new HashSet<Empleado>();
+	
+	@Nullable
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="local")
+	private Set<Pedido> pedidos=new HashSet<Pedido>(); 
+	
+	public Local(){ }
+
+	public Local(int idLocal, String direccion, double latitud, double longitud, long telefono) {
 		super();
 		this.idLocal = idLocal;
 		this.direccion = direccion;
@@ -43,6 +57,8 @@ public class Localito {
 		this.longitud = longitud;
 		this.telefono = telefono;
 	}
+
+
 
 	public int getIdLocal() {
 		return idLocal;
@@ -84,13 +100,30 @@ public class Localito {
 		this.telefono = telefono;
 	}
 
-	
-	public Stock getStock() {
-		return stock;
+
+	public Set<Lote> getLotes() {
+		return lotes;
 	}
 
-	public void setStock(Stock stock) {
-		this.stock = stock;
+	public void setLotes(Set<Lote> lotes) {
+		this.lotes = lotes;
+	}
+
+
+	public Set<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(Set<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	@Override
@@ -98,8 +131,5 @@ public class Localito {
 		return "Local [idLocal=" + idLocal + ", direccion=" + direccion + ", latitud=" + latitud + ", longitud="
 				+ longitud + ", telefono=" + telefono + "]";
 	}
-	
-	
-	
 
-}
+}//fin class

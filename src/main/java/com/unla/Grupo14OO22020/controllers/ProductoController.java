@@ -1,5 +1,9 @@
 package com.unla.Grupo14OO22020.controllers;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,9 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.unla.Grupo14OO22020.converters.LocalConverter;
+import com.unla.Grupo14OO22020.converters.PedidoConverter;
+import com.unla.Grupo14OO22020.entities.Local;
+import com.unla.Grupo14OO22020.entities.Pedido;
 import com.unla.Grupo14OO22020.entities.Producto;
 import com.unla.Grupo14OO22020.helpers.ViewRouteHelpers;
 import com.unla.Grupo14OO22020.models.ProductoModel;
+import com.unla.Grupo14OO22020.repositories.ILocalRepository;
+import com.unla.Grupo14OO22020.repositories.IPedidoRepository;
+import com.unla.Grupo14OO22020.services.ILocalService;
+import com.unla.Grupo14OO22020.services.IPedidoService;
 import com.unla.Grupo14OO22020.services.IProductoService;
 
 @Controller
@@ -23,6 +35,32 @@ public class ProductoController {
 	@Autowired
 	@Qualifier("productoService")
 	private IProductoService productoService;
+	
+	@Autowired
+	@Qualifier("pedidoRepository")
+	private IPedidoRepository pedidoRepository;
+	
+	@Autowired
+	@Qualifier("pedidoService")
+	private IPedidoService pedidoService;
+
+	@Autowired
+	@Qualifier("pedidoConverter")
+	private PedidoConverter pedidoConverter;
+	
+	@Autowired
+	@Qualifier("localService")
+	private ILocalService localService;
+
+	@Autowired
+	@Qualifier("localRepository")
+	private ILocalRepository localRepository;
+
+	
+	@Autowired
+	@Qualifier("localConverter")
+	private LocalConverter localConverter;
+	
 	
 	@GetMapping("")
 	public ModelAndView index() {
@@ -66,4 +104,32 @@ public class ProductoController {
 		return new RedirectView(ViewRouteHelpers.PRODUCTO_ROOT);
 	}
 
+	
+//**********************************************************************	
+	public List<Producto> productosVendidosEntreFechas(Local local, LocalDate menor, LocalDate mayor) {
+		List<Producto> listaProductos = new ArrayList<Producto>();
+		for (Pedido pedido : local.getPedidos()) {
+			if (pedido.getFecha().isAfter(menor) && pedido.getFecha().isBefore(mayor)){
+				if(listaProductos.isEmpty()) { listaProductos.add(pedido.getProducto()); }//la primera vez que entro guardo el primero en la lista
+			    for(Producto producto: listaProductos) {	
+			    	if(producto.getNombre()==pedido.getProducto().getNombre()) {
+			    	   listaProductos.add(pedido.getProducto());
+			    	}//if 3
+			    }//for 2	
+			}//if 1
+		}//for
+		return listaProductos;
+	}
+	
+	
+	public List<Producto> rankingDeProductosVendidos() {
+		List<Producto> productos = new ArrayList<Producto>();
+		for (Pedido pedido : pedidoService.getAll()) {
+//			if (pedido.getFecha().isAfter(menor) && pedido.getFecha().isBefore(mayor)){
+//				productos.add(pedido.getProducto());
+//			}
+		}
+		return productos;
+	}
+//**********************************************************************	
 }//Fin class

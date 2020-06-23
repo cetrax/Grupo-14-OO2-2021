@@ -8,9 +8,13 @@
 	<input type="hidden" th:field="*{fechaAlta}" /> <input type="submit"
 		value="Edit" />
 </form>
-
+<br/>
 <form action="#"
 	th:action="@{/productos/delete/{id}(id=${producto.idProducto})}"
 	method="post">
 	<input type="submit" value="Delete Product" />
 </form>
+    <br/>
+	<br/>
+	<br/>
+	<a th:href="@{/home}"> Volver al home</a>

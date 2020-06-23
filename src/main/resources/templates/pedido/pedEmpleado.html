@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pedido</title>
+</head>
+<body>
+<h4>TODOS LOS PEDIDOS DEL LOCAL DEL EMPLEADO</h4>
+	<h4><td><span th:text="${mensaje1}" /></td></h4>
+ 
+	<table>
+		<thead>
+			<tr>
+				<th>idPedido</th>
+				<th>Fecha</th>
+				<th>Producto</th>
+				<th>Cantidad</th>
+				<th>Cliente</th>
+				<th>Vendedor Original</th>
+				<th>Vendedor Auxiliar</th>
+<!-- 				<th>Subtotal</th> -->
+				<th>Local</th>
+				<th>Aceptado?</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr th:each="pedido : ${pedidosEntrPropios}">
+				<td><span th:text="${pedido.idPedido}" /></td>
+				<td><span th:text="${pedido.fecha}" /></td>
+				<td><span th:text="${pedido.Producto.nombre}" /></td>
+				<td><span th:text="${pedido.cantidad}" /></td>
+				<td><span th:if="${pedido.Cliente}" th:text="${pedido.Cliente.nombre} +' '+ ${pedido.Cliente.apellido}" /></td>
+				<td><span th:if="${pedido.vendedorOriginal}" th:text="${pedido.vendedorOriginal.nombre} +' '+ ${pedido.vendedorOriginal.apellido}" /></td>
+				<td><span th:if="${pedido.vendedorAuxiliar}" th:text="${pedido.vendedorAuxiliar.nombre} +' '+ ${pedido.vendedorAuxiliar.apellido}" /></td>
+<!-- 			<td><span th:text="${subtotal[pedido.idPedido-1]}" /></td>      -->
+                <td><span th:text="${pedido.Local.idLocal}" /></td>  
+				<td><span th:text="${pedido.aceptado}" /></td>
+			</tr>
+		</tbody>
+	</table>
+
+ 
+ <br/>
+   <h4><td><span th:text="${mensaje2}" /></td></h4>
+	<table>
+<!-- 		<thead> -->
+<!-- 			<tr> -->
+<!-- 				<th>idPedido</th> -->
+<!-- 				<th>Fecha</th> -->
+<!-- 				<th>Producto</th> -->
+<!-- 				<th>Cantidad</th> -->
+<!-- 				<th>Cliente</th> -->
+<!-- 				<th>Vendedor Original</th> -->
+<!-- 				<th>Vendedor Auxiliar</th> -->
+<!--  				<th>Subtotal</th>       -->
+<!-- 				<th>Local</th> -->
+<!-- 				<th>Aceptado?</th> -->
+<!-- 			</tr> -->
+
+<!-- 		</thead> -->
+		<tbody>
+			<tr th:each="pedido : ${pedidosEntrAgenos}">
+				<td><span th:text="${pedido.idPedido}" /></td>				
+				<td><span th:text="${pedido.fecha}" /></td>
+				<td><span th:text="${pedido.Producto.nombre}" /></td>
+				<td><span th:text="${pedido.cantidad}" /></td>
+				<td><span th:if="${pedido.Cliente}" th:text="${pedido.Cliente.nombre} +' '+ ${pedido.Cliente.apellido}" /></td>
+				<td><span th:if="${pedido.vendedorOriginal}" th:text="${pedido.vendedorOriginal.nombre} +' '+ ${pedido.vendedorOriginal.apellido}" /></td>
+				<td><span th:if="${pedido.vendedorAuxiliar}" th:text="${pedido.vendedorAuxiliar.nombre} +' '+ ${pedido.vendedorAuxiliar.apellido}" /></td>
+<!-- 			<td><span th:text="${subtotal[pedido.idPedido-1]}" /></td>      -->
+                <td><span th:text="${pedido.Local.idLocal}" /></td>  
+				<td><span th:text="${pedido.aceptado}" /></td>	
+			</tr>
+		</tbody>
+	</table>
+
+<br/>
+           <h4><td><span th:text="${mensaje3}" /></td></h4>
+	<table>
+<!-- 		<thead> -->
+<!-- 			<tr> -->
+<!-- 				<th>idPedido</th> -->
+<!-- 				<th>Fecha</th> -->
+<!-- 				<th>Producto</th> -->
+<!-- 				<th>Cantidad</th> -->
+<!-- 				<th>Cliente</th> -->
+<!-- 				<th>Vendedor Original</th> -->
+<!-- 				<th>Vendedor Auxiliar</th> -->
+<!--  				<th>Subtotal</th>      -->
+<!-- 				<th>Local</th> -->
+<!-- 				<th>Aceptado?</th> -->
+<!-- 			</tr> -->
+
+<!-- 		</thead> -->
+		<tbody>
+			<tr th:each="pedido : ${pedidosRechazdos}">
+				<td><span th:text="${pedido.idPedido}" /></td>
+				<td><span th:text="${pedido.fecha}" /></td>
+				<td><span th:text="${pedido.Producto.nombre}" /></td>
+				<td><span th:text="${pedido.cantidad}" /></td>
+				<td><span th:if="${pedido.Cliente}" th:text="${pedido.Cliente.nombre} +' '+ ${pedido.Cliente.apellido}" /></td>
+				<td><span th:if="${pedido.vendedorOriginal}" th:text="${pedido.vendedorOriginal.nombre} +' '+ ${pedido.vendedorOriginal.apellido}" /></td>
+				<td><span th:if="${pedido.vendedorAuxiliar}" th:text="${pedido.vendedorAuxiliar.nombre} +' '+ ${pedido.vendedorAuxiliar.apellido}" /></td>
+<!-- 			<td><span th:text="${subtotal[pedido.idPedido-1]}" /></td>      -->
+                <td><span th:text="${pedido.Local.idLocal}" /></td>  
+				<td><span th:text="${pedido.aceptado}" /></td>
+			</tr>
+		</tbody>
+	</table>
+
+ <br/>
+
+    <h4><td><span th:text="${mensaje4}" /></td></h4>
+
+ 	<table>
+<!-- 		<thead> -->
+<!-- 			<tr> -->
+<!-- 				<th>idPedido</th> -->
+<!-- 				<th>Fecha</th> -->
+<!-- 				<th>Producto</th> -->
+<!-- 				<th>Cantidad</th> -->
+<!-- 				<th>Cliente</th> -->
+<!-- 				<th>Vendedor Original</th> -->
+<!-- 				<th>Vendedor Auxiliar</th> -->
+<!--  				<th>Subtotal</th>     --> 
+<!-- 				<th>Local</th> -->
+<!-- 				<th>Aceptado?</th> -->
+<!-- 			</tr> -->
+
+<!-- 		</thead> -->
+		<tbody>
+			<tr th:each="pedido : ${pedidosRecibidos}">
+				<td><span th:text="${pedido.idPedido}" /></td>
+				<td><span th:text="${pedido.fecha}" /></td>
+				<td><span th:text="${pedido.Producto.nombre}" /></td>
+				<td><span th:text="${pedido.cantidad}" /></td>
+				<td><span th:if="${pedido.Cliente}" th:text="${pedido.Cliente.nombre} +' '+ ${pedido.Cliente.apellido}" /></td>
+				<td><span th:if="${pedido.vendedorOriginal}" th:text="${pedido.vendedorOriginal.nombre} +' '+ ${pedido.vendedorOriginal.apellido}" /></td>
+				<td><span th:if="${pedido.vendedorAuxiliar}" th:text="${pedido.vendedorAuxiliar.nombre} +' '+ ${pedido.vendedorAuxiliar.apellido}" /></td>
+<!-- 			<td><span th:text="${subtotal[pedido.idPedido-1]}" /></td>      -->
+                <td><span th:text="${pedido.Local.idLocal}" /></td>  
+				<td><span th:text="${pedido.aceptado}" /></td>
+				<td><a th:href="@{/pedidos/empleaAuxi/{id}(id=${pedido.idPedido})}">Ver</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+ <br/>
+       <h3><td><span th:text="${mensaje5}" /></td></h3>
+	<table>
+<!-- 		<thead> -->
+<!-- 			<tr> -->
+<!-- 				<th>idPedido</th> -->
+<!-- 				<th>Fecha</th> -->
+<!-- 				<th>Producto</th> -->
+<!-- 				<th>Cantidad</th> -->
+<!-- 				<th>Cliente</th> -->
+<!-- 				<th>Vendedor Original</th> -->
+<!-- 				<th>Vendedor Auxiliar</th> -->
+<!--  				<th>Subtotal</th>        -->
+<!-- 				<th>Local</th> -->
+<!-- 				<th>Aceptado?</th> -->
+<!-- 			</tr> -->
+
+<!-- 		</thead> -->
+		<tbody>
+			<tr th:each="pedido : ${pedidosAEnviar}">
+				<td><span th:text="${pedido.idPedido}" /></td>
+				<td><span th:text="${pedido.fecha}" /></td>				
+				<td><span th:text="${pedido.Producto.nombre}" /></td>
+				<td><span th:text="${pedido.cantidad}" /></td>
+				<td><span th:if="${pedido.Cliente}" th:text="${pedido.Cliente.nombre} +' '+ ${pedido.Cliente.apellido}" /></td>
+				<td><span th:if="${pedido.vendedorOriginal}" th:text="${pedido.vendedorOriginal.nombre} +' '+ ${pedido.vendedorOriginal.apellido}" /></td>
+				<td><span th:if="${pedido.vendedorAuxiliar}" th:text="${pedido.vendedorAuxiliar.nombre} +' '+ ${pedido.vendedorAuxiliar.apellido}" /></td>
+<!-- 			<td><span th:text="${subtotal[pedido.idPedido-1]}" /></td>      -->
+                <td><span th:text="${pedido.Local.idLocal}" /></td>  
+				<td><span th:text="${pedido.aceptado}" /></td>
+				<td><a th:href="@{/pedidos/empleaOrig/{id}(id=${pedido.idPedido})}">Ver</a></td>
+	
+			</tr>
+		</tbody>
+	</table>
+	
+	
+
+ <br/>
+	<a th:href="@{/pedidos/newPedidoEmpleado}">agregar</a>
+
+    <br/>
+	<br/>
+	<br/>
+	<a th:href="@{/homeEmpleado}"> Volver al home de Empleado</a>
+	<br/>
+	<br/>
+	<a th:href="@{/pedidos/empDelPed}"> Salir del Local (para entrar con otro idEmpleado)</a>
+</body>
+
+</html>
+

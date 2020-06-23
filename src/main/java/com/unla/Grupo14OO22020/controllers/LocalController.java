@@ -1,5 +1,8 @@
 package com.unla.Grupo14OO22020.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,19 +17,41 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.unla.Grupo14OO22020.entities.Localito;
+import com.unla.Grupo14OO22020.converters.LocalConverter;
+import com.unla.Grupo14OO22020.entities.Local;
+import com.unla.Grupo14OO22020.entities.Lote;
 import com.unla.Grupo14OO22020.helpers.ViewRouteHelpers;
 import com.unla.Grupo14OO22020.models.LocalModel;
 import com.unla.Grupo14OO22020.models.LocalesModel;
+import com.unla.Grupo14OO22020.repositories.ILocalRepository;
+import com.unla.Grupo14OO22020.repositories.ILoteRepository;
 import com.unla.Grupo14OO22020.services.ILocalService;
+import com.unla.Grupo14OO22020.services.ILoteService;
+
 
 @Controller
 @RequestMapping("/locales")
 public class LocalController {
 
 	@Autowired
+	@Qualifier("localRepository")
+	private ILocalRepository localRepository;
+	
+	@Autowired
 	@Qualifier("localService")
 	private ILocalService localService;
+	
+	@Autowired
+	@Qualifier("loteRepository")
+	private ILoteRepository loteRepository;
+	
+	@Autowired
+	@Qualifier("loteService")
+	private ILoteService loteService;
+
+	@Autowired
+	@Qualifier("localConverter")
+	private LocalConverter localConverter;
 
 	/*NOTA: Mediante la anotación @RequestMapping mapearemos la petición que muestra el 
 formulario a un método java (será con GET) y la que lo procesa a otro distinto (POST):*/
@@ -34,17 +59,16 @@ formulario a un método java (será con GET) y la que lo procesa a otro distinto
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOCAL_INDEX);
+		 //traerLocalesMasCercanos(1);
 		mAV.addObject("locales", localService.getAll());
 		mAV.addObject("local", new LocalModel());
-
 		return mAV;
 	}
 
 	@GetMapping("/new")
 	public ModelAndView crear() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOCAL_ADD);
-		mAV.addObject("local", new Localito());
-
+		mAV.addObject("local", new Local());
 		return mAV;
 	}
 
@@ -59,11 +83,25 @@ formulario a un método java (será con GET) y la que lo procesa a otro distinto
 		localService.remove(id);
 		return new RedirectView(ViewRouteHelpers.LOCAL_ROOT);
 	}
+	
+	
+	public int calcularStockDelLocal(int idLocal) {
+         int stock = 0;
+       	 for(Lote lote:loteService.getAll()){//traigo todoss los lotes de un local
+           if(lote.getLocal().getIdLocal()==idLocal) {        		
+      	      stock += lote.getCantidadActual(); //sumo la cantidadActual de todos los lotes del local
+           }	
+        }
+	 return stock;
+	}
 
 	@GetMapping("/{id}")
 	public ModelAndView get(@PathVariable("id") int idLocal) {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOCAL_UPDATE);
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOCAL_UPDATE);		
+		mAV.addObject("stock", calcularStockDelLocal(idLocal));
+		mAV.addObject("lotes", loteService.lostesPorLocal(idLocal));
 		mAV.addObject("local", localService.findByIdLocal(idLocal));
+		mAV.addObject("localesCer",traerLocalesMasCercanos(idLocal));
 		return mAV;
 	}
 
@@ -136,12 +174,53 @@ formulario a un método java (será con GET) y la que lo procesa a otro distinto
 	public ModelAndView distancia(@RequestParam("id1") int id1, @RequestParam("id2") int id2,Model model) {
 		LocalModel local1=localService.findByIdLocal(id1);
 		LocalModel local2=localService.findByIdLocal(id2);
-
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOCAL_MOSTRAR);
 		mAV.addObject("resultado",(calcularDistancia(local1 ,local2)));
 
 		return mAV;
 	}
 	//***************fin para calcular distancia pidiendo ingreso de IDs******************	
+
+	
+//**************************Traer LOCALES POR DISTANCIA****************************************************************	
+ 
+	public List<LocalModel> traerLocalesMasCercanos(int idLocal){
+	  LocalModel localBase = localService.findByIdLocal(idLocal);  
+	 // double distancias[]= new double [localService.getAll().size()-1];//es -1 por el local que voy a comparar con los demás
+	  LocalModel localVector[]= new LocalModel [localService.getAll().size()-1];
+	  int i =0;
+	  double aux;//es solo para usarlo en acortar los decimales del resultado y que no quede muy larga la linea
+	  for(Local loc: localService.getAll()){//lo traigo de la entitie para usar el getAll()
+		  if(loc.getIdLocal()!=localBase.getIdLocal()) {//no se compara con el mismo local
+		      LocalModel local =localConverter.entityToModel(loc);//lo convierto a model
+		      aux = calcularDistancia(localBase , local);//para cada local calulo la distancia con respecto a localBase
+		      aux=(double)Math.round(aux * 100d) / 100d; //reduzco	los decimale del resultado a 2 (por eso son los 00) y los casteo como double	
+		      local.setLatitud(aux);//en latitud de cada local guardo la distancia con respecto a localBase, pero no guarda en la BD ya que es solo para mostrarlo asociado al local 
+		      localVector[i] = local;//paso la lista (de a uno) a un vector, para odenar más fácil
+		      i++;//si estaría fuera del if contaria uno de más y sobrepasaría el valor del array
+		  } 
+	  }
+    return odenarLocalesPorDistancia(localVector);//ordeno y retorno como lista (como lista a pedido de Franco, jaja)
+  }
+  
+ //----------------------------------------------------------------------------------- 
+  public List<LocalModel> odenarLocalesPorDistancia(LocalModel vecLocales[]){
+	  List<LocalModel> localesCercanos = new ArrayList<LocalModel>();
+	  LocalModel localAuxiliar=null;
+	  for(int i=1;i<vecLocales.length;i++){//:::ORDENAMIENTO BURBUJA::: usando el tamanño del vector no se consulta a la BD
+		   for(int j= 0;j<vecLocales.length-1;j++) {
+			   if(vecLocales[j].getLatitud()>vecLocales[j+1].getLatitud()){
+				    localAuxiliar = vecLocales[j];
+		            vecLocales[j] = vecLocales[j+1];
+		            vecLocales[j+1] = localAuxiliar;
+	        	}//if
+		    }//for j
+	  }//for i
+	  for (int i=0;i<vecLocales.length;i++){
+		  localesCercanos.add(vecLocales[i]);// lo guardo de nuevo en una lista 
+	  }
+	  return localesCercanos;
+  }
+//**************************FIN Traer LOCALES POR DISTANCIA****************************************************************	  
 
 }//Fin class

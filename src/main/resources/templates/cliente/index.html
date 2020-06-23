@@ -8,6 +8,7 @@
 	<table>
 		<thead>
 			<tr>
+			    <th>Id</th>
 				<th>Nombre</th>
 				<th>Apellido</th>
 				<th>Dni</th>
@@ -18,6 +19,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="cliente : ${clientes}">
+			    <td><span th:text="${cliente.idPersona}" /></td>
 				<td><span th:text="${cliente.nombre}" /></td>
 				<td><span th:text="${cliente.apellido}" /></td>
 				<td><span th:text="${cliente.dni}" /></td>
@@ -28,9 +30,13 @@
 			</tr>
 		</tbody>
 	</table>
-
+    <br/>
 	<a th:href="@{/clientes/new}">agregar</a>
 
+    <br/>
+	<br/>
+	<br/>
+	<a th:href="@{/home}"> Volver al home</a>
 </body>
 
 </html>

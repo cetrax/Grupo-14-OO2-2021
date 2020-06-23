@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Ver/modificar datos</title>
+</head>
+<body>
+	
+	<form action="#" th:action="@{/pedidos/updateEmplOri}" th:object="${pedido}"
+		method="post">
+		<input type="hidden" th:field="*{idPedido}" />
+       <h4>Realice el/los cambio/s que crea necesario/s :</h4>
+		<p>
+			Cambiar producto del pedido: <select placeholder="Producto"
+				th:field="*{producto.idProducto}">
+				<option th:each="p: ${productos}" th:value="${p.idProducto}"
+					th:text="${p.nombre}"></option>
+			</select>
+		</p>
+
+		<p>
+			Cambiar el cliente: <select placeholder="Cliente"
+				th:field="*{cliente.idPersona}">
+				<option th:each="c: ${clientes}" th:value="${c.idPersona}"
+					th:text="${c.nombre} +' '+ ${c.apellido}"></option>
+			</select>
+		</p>
+
+		<p>
+			Cambiar el vendedor original: <select placeholder="Empleado"
+				th:field="*{vendedorOriginal.idPersona}">
+				<option th:each="e: ${empleados}" th:value="${e.idPersona}"
+					th:text="${e.nombre} +' '+ ${e.apellido}+'   Local '+${e.local.idLocal}"></option>
+			</select>
+		</p>
+
+		<p>Ingresar una cantidad menor : <input type="number" th:field="*{cantidad}" /> </p> 
+
+		<p> Eligir el Local al que solicitara Pedido/Stock:  
+		    <select placeholder="Local" th:field="*{local.idLocal}">
+				<option th:each="l: ${locales}" th:value="${l.idLocal}" th:text="'Local  '+${l.idLocal}"></option>
+		  	</select> 
+		</p>			  
+
+		<br /> <input type="submit" value="Edit" />
+	</form>
+    <br /> 
+	<form action="#"
+		th:action="@{/pedidos/delete/{id}(id=${pedido.idPedido})}"
+		method="post">
+		<input type="submit" value="Delete Pedido" />
+	</form>
+	
+<br/>
+<br/>
+<br/>
+<table>
+	<thead>
+		<tr>
+			<th>idLocal</th>
+			<th>Nombre/Direccion</th>
+			<th>Distancia desde el que se consulta</th>
+		</tr>
+
+	</thead>
+	<tbody>
+		<tr th:each="local : ${localesOrd}">
+    		<td><span th:text="${local.idLocal}"/></td>
+			<td><span th:text="${local.direccion}"/></td>
+			<td><span th:text="${local.latitud}"/></td>
+		</tr>
+	</tbody>
+</table>
+	
+
+    <br/>
+	<br/>
+	<br/>
+	<a th:href="@{/home}"> Volver al home</a>	
+	
+</body>
+</html>
