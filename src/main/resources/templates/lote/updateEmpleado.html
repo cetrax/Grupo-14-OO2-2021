@@ -1,0 +1,194 @@
+
+<!--  
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<title>Update</title>
+	</head>
+  <body>
+
+<form action="#" th:action="@{/lotes/update}" th:object="${lote}" method="post">
+    <input type="hidden" th:field="*{idLote}" />
+    Producto: 
+	<select placeholder="Producto" th:field="*{producto.idProducto}">
+	<option th:each="p: ${productos}" th:value="${p.idProducto}" th:text="${p.descripcion}"></option>
+	</select>
+	<p> CantidadActual: <input type="number" th:field="*{cantidadActual}" /> </p>
+	<p>	Estado: <input type="checkbox" th:field="*{estado}" /> </p>
+	
+	<br/>
+	<br/>
+    <input type="submit" value="Edit" />
+</form>
+<form action="#"
+	th:action="@{/lotes/delete/{id}(id=${lote.idLote})}"
+	method="post">
+	<input type="submit" value="Delete Lote" />
+</form>
+</body>
+</html>
+-->
+ <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+
+<!--   ---------------------------------------------------------------------------------------------     -->
+
+
+
+  <!--   ---------------------------------------------------------------------------------------------     -->
+
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="static/css/user-form.css" th:href="@{/css/user-form.css}">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    LOTES
+  </title>
+  
+  
+  
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- CSS Files -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="/demo/demo.css" rel="stylesheet" />
+</head>
+
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="yellow">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+      <div class="logo">
+        <a href="http://www.unla.edu.ar/carreras/grado/licenciaturas/sistemas" class="simple-text logo-mini">
+         <i class="now-ui-icons education_hat"></i>
+        </a>
+        <a href="http://www.unla.edu.ar/carreras/grado/licenciaturas/sistemas" class="simple-text logo-normal">
+          UNLa SISTEMAS
+        </a>
+      </div>
+      <div class="sidebar-wrapper" id="sidebar-wrapper">
+        <ul class="nav">
+          <li>
+            <a href="/homeEmpleado">
+              <i class="now-ui-icons business_globe"></i>
+              <p>HOME</p>
+            </a>
+          </li>
+          <li>
+            <a href="/productos/indexEmpleado" class="full-width">
+              <i class="now-ui-icons shopping_tag-content"></i>
+              <p>Productos</p>
+            </a>
+          </li>
+          <li>
+            <a href="/pedidos/empDelPed">
+              <i class="now-ui-icons shopping_cart-simple"></i>
+              <p>Pedidos</p>
+            </a>
+          </li>
+          <li class="active ">
+            <a href="/lotes/indexEmpleado">
+              <i class="now-ui-icons shopping_box"></i>
+              <p>Lotes</p>
+            </a>
+          </li>
+          <li>
+            <a href="/clientes/indexEmpleado">
+              <i class="now-ui-icons users_single-02"></i>
+              <p>Clientes</p>
+            </a>
+          </li>
+          <li class="active-pro">
+            <a href="/error">
+              <i class="now-ui-icons ui-2_settings-90"></i>
+              <p>Reportar Error</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+	<div class="container">
+		<div class="mx-auto col-sm-16 main-section" id="myTab" role="tablist">
+
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="list" role="tabpanel"
+					aria-labelledby="list-tab">
+
+
+					<div class="card text-white bg-primary mb-3">
+							<div class="card-header">
+							<h5 class="card-title">EDITAR LOTE</h5>
+							</div>
+							<div class="card-body">
+
+
+							<div class="table-responsive">
+								<table id="userList"
+									class="table table-bordered table-hover table-striped">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">Producto</th>
+											<th scope="col">Local</th>
+											<th scope="col">Cantidad Inicial</th>
+											<th scope="col">Local</th>
+											<th scope="col">Estado</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<form action="#" th:action="@{/lotes/updateEmpleado}" th:object="${lote}" method="post">
+											<!--  coloco el id Producto como identificador de cada item en la tabla -->
+											<input type="hidden" th:field="*{idLote}" />
+											<input type="hidden" th:field="*{fechaIngreso}" />
+											<th scope="row"><span th:text="${lote.idLote}" /></th>
+									
+											<td>
+											<select class="form-control" placeholder="Producto" th:field="*{producto.idProducto}">
+												<option th:each="p: ${productos}" th:value="${p.idProducto}" th:text="${p.nombre}"></option>
+											</select>
+											</td>
+											
+											<td>
+												<select class="form-control" placeholder="Local" th:field="*{local.idLocal}">
+													<option th:each="l: ${locales}" th:value="${l.idLocal}" th:text="${l.direccion}"></option>
+											  	</select>
+											</td>
+											
+											<td><input class="form-control" type="number" pattern="-?[0-9]*(\.[0-9]+)?" th:field="*{cantidadInicial}"></td>
+											<td><input class="form-control" type="checkbox" th:field="*{estado}"></td>
+
+
+												<td><button class="btn btn-outline-primary waves-effect btn-sm">
+												<i class="far fa-edit"></i>
+												</button></td>
+										</form>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				<div class="tab-pane fade" id="form" role="tabpanel"
+					aria-labelledby="form-tab"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

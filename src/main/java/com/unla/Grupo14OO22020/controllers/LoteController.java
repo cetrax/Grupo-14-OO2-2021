@@ -19,6 +19,7 @@ import com.unla.Grupo14OO22020.services.IProductoService;
 
 
 
+
 @Controller
 @RequestMapping("/lotes")
 public class LoteController {
@@ -31,9 +32,68 @@ public class LoteController {
 	@Qualifier("productoService")
 	private IProductoService productoService;
 	
+	
 	@Autowired
 	@Qualifier("localService")
 	private ILocalService localService;
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
+
+	@GetMapping("/indexEmpleado")
+	public ModelAndView indexEmpleado() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOTE_INDEXEMPLEADO);
+		mAV.addObject("lotes", loteService.getAll());
+		mAV.addObject("lote", new LoteModel());
+		
+		return mAV;
+	}
+	
+	@GetMapping("/newEmpleado")
+	public ModelAndView crearEmpleado() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOTE_ADDEMPLEADO);
+		mAV.addObject("lote", new LoteModel());
+		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("locales", localService.getAll());
+		return mAV;
+	}
+	
+	@PostMapping("/createEmpleado")
+	public RedirectView agregarEmpleado(@ModelAttribute(name="lotes") LoteModel lote) {
+		lote.setCantidadActual(lote.getCantidadInicial());
+		loteService.Insert(lote);
+		return new RedirectView(ViewRouteHelpers.LOTE_ROOTEMPLEADO);
+	}
+	
+	@GetMapping("/updateEmpleado/{id}")
+	public ModelAndView getEmpleado(@PathVariable("id") int idLote) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOTE_UPDATEEMPLEADO);
+		mAV.addObject("lote", loteService.findByIdLote(idLote));
+		mAV.addObject("productos", productoService.getAll());
+		return mAV;
+	}
+	
+	@PostMapping("/updateEmpleado")
+	public RedirectView updateEmpleado(@ModelAttribute("lotes") LoteModel loteModel) {
+		loteService.Update(loteModel);
+		return new RedirectView(ViewRouteHelpers.LOTE_ROOTEMPLEADO);
+	}
+	
+	@PostMapping("/deleteEmpleado/{id}")
+	public RedirectView eliminarEmpleado(@PathVariable("id") int id) {
+		loteService.remove(id);
+		return new RedirectView(ViewRouteHelpers.LOTE_ROOTEMPLEADO);
+	}	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
 	
 	@GetMapping("")
 	public ModelAndView index() {
@@ -49,8 +109,7 @@ public class LoteController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.LOTE_ADD);
 		mAV.addObject("lote", new LoteModel());
 		mAV.addObject("productos", productoService.getAll());
-		mAV.addObject("locales",localService.getAll());
-		
+		mAV.addObject("locales", localService.getAll());
 		return mAV;
 	}
 	

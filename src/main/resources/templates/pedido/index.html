@@ -1,41 +1,178 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Pedido</title>
+
+
+
+<!--   ---------------------------------------------------------------------------------------------     -->
+
+
+
+  <!--   ---------------------------------------------------------------------------------------------     -->
+
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="static/css/user-form.css" th:href="@{/css/user-form.css}">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    PEDIDOS
+  </title>
+  
+  
+  
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- CSS Files -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="/demo/demo.css" rel="stylesheet" />
 </head>
-<body>
 
-	<table>
-		<thead>
-			<tr>
-				<th>idPedido</th>
-				<th>Producto</th>
-				<th>Cantidad</th>
-				<th>Cliente</th>
-				<th>Vendedor Original</th>
-				<th>Vendedor Auxiliar</th>
-				<th>Aceptado?</th>
-			</tr>
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="yellow">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+      <div class="logo">
+        <a href="http://www.unla.edu.ar/carreras/grado/licenciaturas/sistemas" class="simple-text logo-mini">
+         <i class="now-ui-icons education_hat"></i>
+        </a>
+        <a href="http://www.unla.edu.ar/carreras/grado/licenciaturas/sistemas" class="simple-text logo-normal">
+          UNLa SISTEMAS
+        </a>
+      </div>
+      <div class="sidebar-wrapper" id="sidebar-wrapper">
+        <ul class="nav">
+          <li>
+            <a href="/home">
+              <i class="now-ui-icons business_globe"></i>
+              <p>HOME</p>
+            </a>
+          </li>
+          <li>
+            <a href="/productos" class="full-width">
+              <i class="now-ui-icons shopping_tag-content"></i>
+              <p>Productos</p>
+            </a>
+          </li>
+          <li class="active ">
+            <a href="/pedidos">
+              <i class="now-ui-icons shopping_cart-simple"></i>
+              <p>Pedidos</p>
+            </a>
+          </li>
+          <li>
+            <a href="/lotes">
+              <i class="now-ui-icons shopping_box"></i>
+              <p>Lotes</p>
+            </a>
+          </li>
+          <li>
+            <a href="/locales">
+              <i class="now-ui-icons shopping_shop"></i>
+              <p>Locales</p>
+            </a>
+          </li>
+          <li>
+            <a href="/clientes">
+              <i class="now-ui-icons users_single-02"></i>
+              <p>Clientes</p>
+            </a>
+          </li>
+          <li>
+            <a href="/empleados">
+              <i class="now-ui-icons users_circle-08"></i>
+              <p>Empleados</p>
+            </a>
+          </li>
+          <li class="active-pro">
+            <a href="/error">
+              <i class="now-ui-icons ui-2_settings-90"></i>
+              <p>Reportar Error</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+	<div class="container">
+		<div class="mx-auto col-md-16 main-section" id="myTab" role="tablist">
 
-		</thead>
-		<tbody>
-			<tr th:each="pedido : ${pedidos}">
-				<td><span th:text="${pedido.idPedido}" /></td>
-				<td><span th:text="${pedido.Producto.nombre}" /></td>
-				<td><span th:text="${pedido.cantidad}" /></td>
-				<td><span th:text="${pedido.Cliente.nombre}" /></td>
-				<td><span th:text="${pedido.vendedorOriginal.nombre}" /></td>
-				<td><span th:if="${pedido.vendedorAuxiliar}" th:text="${pedido.vendedorAuxiliar.nombre} +' '+ ${pedido.vendedorAuxiliar.apellido}" /></td>
-				<td><span th:text="${pedido.aceptado}" /></td>
-				<td><a th:href="@{/pedidos/{id}(id=${pedido.idPedido})}">Ver</a></td>
-	
-			</tr>
-		</tbody>
-	</table>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="list" role="tabpanel"
+					aria-labelledby="list-tab">
 
-	<a th:href="@{/pedidos/new}">agregar</a>
 
+					<div class="card text-white bg-primary mb-3">
+							<div class="card-header">
+							<h5 class="card-title">PEDIDOS</h5>
+							</div>
+							<div class="card-body">
+
+
+							<div class="table-responsive">
+								<table id="userList" class="table table-bordered table-hover table-striped">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">Producto</th>
+											<th scope="col">Cantidad</th>
+											<th scope="col">Cliente</th>
+											<th scope="col">Vendedor Original</th>
+											<th scope="col">Vendedor Auxiliar</th>
+											<th scope="col">Aceptado?</th>
+											<th scope="col">Local</th>
+											<th scope="col">SubTotal</th>
+										</tr>
+									</thead>
+									<tbody>
+											
+										<tr th:each="pedido : ${pedidos}">
+										<!--  coloco el id Producto como identificador de cada item en la tabla -->
+											<th scope="row"><span th:text="${pedido.idPedido}" /></th>
+											<td><span th:text="${pedido.Producto.nombre}" /></td>
+											<td><span th:text="${pedido.cantidad}" /></td>
+											<td><span th:text="${pedido.Cliente.Nombre}" /> <span th:text="${pedido.Cliente.Apellido}" /></td>
+											<td><span th:text="${pedido.VendedorOriginal.Nombre}" /> <span th:text="${pedido.VendedorOriginal.Apellido}" /></td>
+											<td><span th:text="${pedido.VendedorAuxiliar.Nombre}" /> <span th:text="${pedido.VendedorAuxiliar.Apellido}" /></td>
+											<td><span th:text="${pedido.Local.idLocal}" /></td>
+											<td><span th:text="${pedido.aceptado}" /></td>
+											<td><span th:text="${subtotal[pedido.idPedido-1]}" /></td>
+
+												<td>
+												<div sec:authorize="hasRole('ROLE_GERENTE') or hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADO')"  class="mdl-list__item mdl-list__item--two-line">
+												<a th:href="@{/pedidos/{id}(id=${pedido.idPedido})}"> <button type="button" class="btn btn-outline-primary waves-effect btn-sm"><i class="now-ui-icons ui-1_zoom-bold"></i></button></a>
+												<form action="#" th:action="@{/pedidos/delete/{id}(id=${pedido.idPedido})}" method="post"> <button type="submit" class="btn btn-outline-primary waves-effect btn-sm"><i class="now-ui-icons ui-1_simple-remove"></i></button></form>  
+												</div>
+												</td>
+
+												
+
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+
+							<h4>Añadir Pedido  <a th:href="@{/pedidos/new}"><button type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i></button></a></h4>
+
+							
+
+						</div>
+					</div>
+
+
+
+				</div>
+				<div class="tab-pane fade" id="form" role="tabpanel"
+					aria-labelledby="form-tab"></div>
+			</div>
+		</div>
+	</div>
 </body>
-
 </html>
-
